@@ -15,20 +15,21 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-                <?php
-        
-              echo '<li><a href="index.php">ACCUEIL</a></li>';
-              echo '<li><a href="#band">PERSONNAGES</a></li>';
-              echo '<li><a href="#tour">RENDEZ-VOUS</a></li>';
-              echo '<li><a href="#contact">CONTACT</a></li>';
-                ?>
+               
             <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Acces Direct
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">LES CHAPITRES
           <span class="caret"></span></a>
                         <ul class="dropdown-menu">
         
             <?= $contentMenu ?>
                 </ul></li>
+              <?php
+        
+              echo '<li><a href="index.php">ACCUEIL</a></li>';
+              echo '<li><a href="#band">PERSONNAGES</a></li>';
+              echo '<li><a href="#tour">RENDEZ-VOUS</a></li>';
+              echo '<li><a href="#contact">CONTACT</a></li>';
+                ?>   
         </div>
     </div>
 </nav>
