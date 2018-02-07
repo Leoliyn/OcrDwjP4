@@ -44,8 +44,9 @@ $data=$article;
  
 <h2>Votre commentaire</h2>
 
-<form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post">
+<form action="index.php?action=addComment&amp;id=<?= $data['ART_ID'] ?>" method="post">
     <div>
+        <input type="hidden" id="postId" name="postId" value="<?= $data['ART_ID'] ?>" />
         <label for="author">Auteur</label><br />
         <input type="text" id="author" name="author" />
     </div>
@@ -54,7 +55,7 @@ $data=$article;
         <textarea id="comment" name="comment"></textarea>
     </div>
     <div>
-        <input type="submit" />
+        <input class="btn btn-primary" type="submit" name="envoyerComm" value="Envoyer"/>
     </div>
 </form>
 <div class ='text-center'>
@@ -74,7 +75,7 @@ while ($comment = $comments->fetch())
      if($commentSignale){ 
     echo '<i class="fa fa-thumbs-down  fa-2x red"></i>';
     }else{
-          echo '<a href="indexadmin.php?action=enableSignal&amp;commId='.$comment['COMM_ID'].'&amp;id='.$data['ART_ID'].'" title="Cliquez pour signaler le commentaire"><i class="fa fa-thumbs-o-up  fa-2x vert"></i></a>';   
+          echo '<a href="index.php?action=enableSignal&amp;commId='.$comment['COMM_ID'].'&amp;id='.$data['ART_ID'].'" title="Cliquez pour signaler le commentaire"><i class="fa fa-thumbs-o-up  fa-2x vert"></i></a>';   
          
      }
  ?>

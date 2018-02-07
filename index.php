@@ -1,10 +1,21 @@
 <?php
 session_start();
+ini_set('display_errors', 1);
 require_once  'controler/frontend/frontend.php'; 
 if(isset($_GET['action'])AND ($_GET['action']=='post')AND (isset($_GET['id'])))
         {
       post();
-}else{
+}elseif(isset($_GET['action'])AND ($_GET['action']=='addComment')AND (isset($_GET['id']))){
+    
+    ajoutComment();
+    
+  }
+        elseif(isset($_GET['action'])AND ($_GET['action']=='enableSignal')AND (isset($_GET['id'])))
+        {
+            activeSignal();
+         }
+    
+else{
       
         listPostsResume();        
         }
