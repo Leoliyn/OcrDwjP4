@@ -1,4 +1,27 @@
 <?php $title = 'Jean FORTEROCHE'; ?>
+<?php ob_start();?>
+
+<?php
+while ($data = $posts->fetch())
+{
+
+?>  
+
+
+    <li><a href="index.php?action=post&id=<?= $data['ART_ID']?>">Chap <?= $data['ART_CHAPTER']?> :<?=$data['ART_TITLE']?> </a>
+</li>
+ 
+
+<?php
+}
+
+$posts->closeCursor();
+?>
+
+    
+
+<?php $contentMenu = ob_get_clean(); ?>
+
 
 <?php ob_start(); ?>
 
@@ -16,13 +39,10 @@ $data=$article;
        
         <p><em>le <?= $data['DATE_fr'] ?></em></p>
    <p><?= ($data['ART_CONTENT']) ?></p>
-       <div class='icone-admin'>
-       
-             <a href="index.php" title="Retour à la liste"><i class="fa fa-arrow-left  fa-2x "></i></a>
-        </div>
+
     </div>
-  
-<h2>Rajouter votre commentaire</h2>
+ 
+<h2>Votre commentaire</h2>
 
 <form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post">
     <div>

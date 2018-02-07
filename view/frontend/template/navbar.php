@@ -21,10 +21,14 @@
               echo '<li><a href="#band">PERSONNAGES</a></li>';
               echo '<li><a href="#tour">RENDEZ-VOUS</a></li>';
               echo '<li><a href="#contact">CONTACT</a></li>';
-          
-          ?>
-            
-            </ul>
+                ?>
+            <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Acces Direct
+          <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+        
+            <?= $contentMenu ?>
+                </ul></li>
         </div>
     </div>
 </nav>
