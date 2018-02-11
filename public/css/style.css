@@ -17,6 +17,13 @@ tr,td ,table {
     
     
 }
+.miniature {
+    height:137px;
+    width:400px;
+    
+    
+    
+}
   h3, h4 {
       margin: 10px 0 30px 0;
       letter-spacing: 10px;      

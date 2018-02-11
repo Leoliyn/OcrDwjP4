@@ -9,7 +9,14 @@ tr,td ,table {
     
     
 }
-
+.icone-admin {
+   
+    display: flex;
+    flex-direction: row;
+    
+    
+    
+}
 #iconeWarning {
     
     color :red;

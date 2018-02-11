@@ -54,7 +54,7 @@ while ($data = $posts->fetch())
       <div class="modal-content">
         <div class="modal-header">
       
-          <h4><span class="fa fa-trash"></span> Etes-vous sur de vouloir supprimer l'article ?</h4>
+            <h4><span class="fa fa-trash"></span> Etes-vous sur de vouloir supprimer l'article ?<br/>(Tous les commentaires seront supprimés également)</h4>
         </div>
         <div class="modal-body">
           <form role="form" action="indexadmin.php" method="get">

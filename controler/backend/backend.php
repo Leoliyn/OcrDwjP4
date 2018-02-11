@@ -46,19 +46,21 @@ function formNewPost()
 }
 
 
-////////////////////////////
+////////////Lorsqu'on met à jour un article on le desactive par defaut ////////////////
 
 function majPost()
 {
  $postManager = new OpenClassrooms\DWJP4\Backend\Model\PostManager();
-     $article = $postManager->updatePost($_POST['art_chapter'],$_POST['art_title'],$_POST['art_subtitle'],$_POST['art_content'],$_POST['art_desactive'],$_POST['art_id']);
+    /* $article = $postManager->updatePost($_POST['art_chapter'],$_POST['art_title'],$_POST['art_subtitle'],$_POST['art_content'],$_POST['art_desactive'],$_POST['art_id']);
+    $_GET['id'] = $_POST['art_id']; */
+    $article = $postManager->updatePost($_POST['art_chapter'],$_POST['art_title'],$_POST['art_subtitle'],$_POST['art_content'],1,$_POST['art_id'],$_POST['art_description'],$_POST['art_keywords']);
     $_GET['id'] = $_POST['art_id']; 
    post();
 }   
  function ajouterPost()   
  {
    $postManager = new OpenClassrooms\DWJP4\Backend\Model\PostManager();
-     $article = $postManager->addPost($_POST['art_chapter'],$_POST['art_title'],$_POST['art_subtitle'],$_POST['art_content']);
+     $article = $postManager->addPost($_POST['art_chapter'],$_POST['art_title'],$_POST['art_subtitle'],$_POST['art_content'],$_POST['art_description'],$_POST['art_keywords']);
     
  listPosts();
  }
@@ -164,3 +166,4 @@ $commentManager = new OpenClassrooms\DWJP4\Backend\Model\commentManager();
 $comment = $commentManager->disableSignal($_GET['commId']);  
  post();
 }   
+

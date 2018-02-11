@@ -1,75 +1,82 @@
-<?php $title = 'Jean FORTEROCHE'; ?>
+<?php $title = 'Jean FORTEROCHE Billet pour l\'ALASKA '; ?>
 <?php ob_start();?>
 
 <?php
 while ($data = $posts->fetch())
 {
 
-?>  
+?>
 
 
     <li><a href="index.php?action=post&id=<?= $data['ART_ID']?>">Chap <?= $data['ART_CHAPTER']?> :<?=$data['ART_TITLE']?> </a>
-</li>
- 
+    </li>
 
-<?php
+
+    <?php
+
 }
 
 $posts->closeCursor();
 ?>
 
-    
-
-<?php $contentMenu = ob_get_clean(); ?>
 
 
-<?php ob_start(); ?>
+    <?php $contentMenu = ob_get_clean(); ?>
 
 
-<?php
+    <?php ob_start(); ?>
+
+
+    <?php
 
 $data=$article;
+$title .= $data['ART_TITLE'];
+$description =$data['ART_DESCRIPTION'];
+$keywords = $data['ART_KEYWORDS'];
 ?>
-    <div class='resume'>
-        
-        <h3>
-            <?= htmlspecialchars($data['ART_TITLE']) ?>
-            
-        </h3>
-       
-        <p><em>le <?= $data['DATE_fr'] ?></em></p>
-   <p><?= ($data['ART_CONTENT']) ?></p>
+        <div class='resume'>
 
-    </div>
- 
-<h2>Votre commentaire</h2>
+            <h3>
+                <?= htmlspecialchars($data['ART_TITLE']) ?>
 
-<form action="index.php?action=addComment&amp;id=<?= $data['ART_ID'] ?>" method="post">
-    <div>
-        <input type="hidden" id="postId" name="postId" value="<?= $data['ART_ID'] ?>" />
-        <label for="author">Auteur</label><br />
-        <input type="text" id="author" name="author" />
-    </div>
-    <div>
-        <label for="comment">Commentaire</label><br />
-        <textarea id="comment" name="comment"></textarea>
-    </div>
-    <div>
-        <input class="btn btn-primary" type="submit" name="envoyerComm" value="Envoyer"/>
-    </div>
-</form>
-<div class ='text-center'>
-<a class="up-arrow " href="#myCarousel" data-toggle="tooltip" title="HAUT">
+            </h3>
+
+            <p><em>le <?= $data['DATE_fr'] ?></em></p>
+            <p>
+                <?= ($data['ART_CONTENT']) ?>
+            </p>
+
+        </div>
+
+        <h2>Votre commentaire</h2>
+
+        <form action="index.php?action=addComment&amp;id=<?= $data['ART_ID'] ?>" method="post">
+            <div>
+                <input type="hidden" id="postId" name="postId" value="<?= $data['ART_ID'] ?>" />
+                <label for="author">Auteur</label><br />
+                <input type="text" id="author" name="author" />
+            </div>
+            <div>
+                <label for="comment">Commentaire</label><br />
+                <textarea id="comment" name="comment"></textarea>
+            </div>
+            <div>
+                <input class="btn btn-primary" type="submit" name="envoyerComm" value="Envoyer" />
+            </div>
+        </form>
+        <div class='text-center'>
+            <a class="up-arrow " href="#myCarousel" data-toggle="tooltip" title="HAUT">
     <span class="glyphicon glyphicon-chevron-up"></span>
   </a>
-</div>
-<h2>Commentaire(s)</h2>
-<?php
+        </div>
+       
+        <?php
 while ($comment = $comments->fetch())
+   
 {
 ?>
-<div class='resume '>
-    <?php
+            <div class='resume '>
+                <?php
    
  $commentSignale=$comment['SIGNALE'];
      if($commentSignale){ 
@@ -79,18 +86,63 @@ while ($comment = $comments->fetch())
          
      }
  ?>
-    <p><strong><?= htmlspecialchars($comment['COMM_PSEUDO']) ?></strong> le <?= $comment['COMM_date_fr'] ?></p>
-      <div >  
-    <p><?= nl2br(htmlspecialchars($comment['COMM_TITRE'])) ?></p>
-<p><?= nl2br(htmlspecialchars($comment['COMM_CONTENU'])) ?></p>
+                    <p><strong><?= htmlspecialchars($comment['COMM_PSEUDO']) ?> </strong>a écrit le
+                        <?= $comment['COMM_date_fr'] ?>
+                    </p>
+                    <div>
+                        <p>
+                            <?= nl2br(htmlspecialchars($comment['COMM_TITRE'])) ?>
+                        </p>
+                        <p>
+                            <?= nl2br(htmlspecialchars($comment['COMM_CONTENU'])) ?>
+                        </p>
 
-    </div>
-    
-</div>
+                    </div>
 
-<?php
+            </div>
+
+            <?php
 }
 ?>
-<?php $content = ob_get_clean(); ?>
+            <?php $content = ob_get_clean(); ?>
+            <?php ob_start(); ?>
 
-<?php require('template.php'); ?>
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <?php
+        $filename= "uploads/";
+        $filename .= $data['ART_ID'];
+        $filename .=".jpg" ;
+         if (file_exists($filename)) {
+                       ?>
+                            <img src="uploads/<?= $data['ART_ID'] ?>.jpg" alt="illustration <?= $data['ART_TITLE'] ?><?= $data['ART_SUBTITLE'] ?><?= $data['ART_CHAPTER'] ?>" width="1200" height="700">
+                            <?php 
+         }else{ ?>
+                            <img src="public/images/1.jpg" alt="illustration <?= $data['ART_TITLE'] ?>" "<?= $data['ART_SUBTITLE'] ?>" Chapitre "<?= $data['ART_CHAPTER'] ?>" width="1200" height="700">
+
+                            <?php 
+         }
+          
+          ?>
+                            <div class="carousel-caption">
+                                <h2>Chapitre
+                                    <?= $data['ART_CHAPTER'] ?>
+                                </h2>
+                                <h1>
+                                    <?= $data['ART_TITLE'] ?>
+                                </h1>
+                                <h3>
+                                    <?= $data['ART_SUBTITLE'] ?>
+                                </h3>
+
+                            </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <?php $slider = ob_get_clean();?>
+
+            <?php require('template.php'); ?>

@@ -14,9 +14,8 @@ if(isset($_GET['action'])AND ($_GET['action']=='post')AND (isset($_GET['id'])))
 } elseif(isset($_GET['action'])AND ($_GET['action']=='enableSignal')AND (isset($_GET['id'])))
         {
             activeSignal();
-         }
+         }else {
     
-else{
       
         listPostsResume();        
         }

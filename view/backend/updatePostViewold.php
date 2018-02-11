@@ -25,48 +25,27 @@ $data=$article;
         <label> Titre</label><input type="texte" class="form-control" id="art_title" name = "art_title" value="<?= $data['ART_TITLE'] ?>">
         <label> Sous-titre</label><input type="texte" class="form-control" id="art_subtitle" name = "art_subtitle" value="<?= $data['ART_SUBTITLE'] ?>">
         <label> Article</label><textarea style="width: 100%;" name="art_content"><?= $data['ART_CONTENT']?> </textarea>
-        <label> Description</label><input style="width: 100%;" name="art_description" id="art_description" value="<?= $data['ART_DESCRIPTION'] ?>" /><br />
-        <label> Mots clés (séparés par une virgule)</label><input style="width: 100%;" name="art_keywords" id="art_keywords"  value="<?= $data['ART_KEYWORDS'] ?>"/><br />   
+        
         <input class="btn btn-primary" type="submit" name="send" value="Envoyer" />
         <input class="btn btn-primary" type="reset" name="reset" value="Reset" />
         <a href="indexadmin.php?action=post&amp;id=<?= $data['ART_ID'] ?>"><input class="btn btn-primary" type="button" name="retour" value="Retour" /></a>
         </form>
-   <form enctype="multipart/form-data" action="indexadmin.php?action=updatePost&amp;id=<?= $data['ART_ID'] ?>" method="POST">
+   <form method="POST" action="indexadmin.php?action=upload&amp;id=<?= $data['ART_ID'] ?>" enctype="multipart/form-data">
+ 
+     <label for="mon_fichier">Fichier (formats jpg | max. 1 Mo) :</label><br />
+     <input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
+    <input type="hidden" name="postId" value="<?= $data['ART_ID'] ?>" />
+     <input type="file" name="fichier" id="fichier" /><br />
+     <label for="titre">Titre du fichier (max. 50 caractères) :</label><br />
+     <input type="text" name="titre" value="Titre du fichier" id="titre" /><br />
+     <label for="description">Description de votre fichier (max. 255 caractères) :</label><br />
+    <input type="text" name="description" value="description du fichier" id="description" /><br />
+     
+     
+     <input type="submit" name="submit" value="Envoyer" />
+</form>
 
-    <p>Télécharger votre fichier</p>
-
-    <input type="file" name="uploaded_file" />    <input type="submit" value="Upload" />
- <input type="hidden" name="postId" value="<?= $data['ART_ID'] ?>" />
-  </form>
-<img src='./uploads/<?= $data['ART_ID'] ?>.jpg' class="miniature" />
 </div>
-<?PHP
-
-  if(!empty($_FILES['uploaded_file']))
-
-  {
-
-    $path = "uploads/";
-$_FILES['uploaded_file']['name']= $data['ART_ID'].".jpg";
-    $path = $path . basename( $_FILES['uploaded_file']['name']);
-
-
-
-    if(move_uploaded_file($_FILES['uploaded_file']['tmp_name'], $path)) {
-
-      echo "Le fichier ".  basename( $_FILES['uploaded_file']['name']). 
-
-      " à été uploadé";
-
-    } else{
-
-        echo "Une erreur s'est produite durant l\'opération . Veuillez réessayer";
-
-    }
-
-  }
-
-?>
 <?php $content = ob_get_clean(); ?>
 
 <?php require('view/backend/template.php'); ?>

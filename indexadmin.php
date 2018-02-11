@@ -1,12 +1,13 @@
 <?php
 session_start();
-
+ini_set('display_errors', 1);
 require_once('controler/backend/backend.php'); 
 
 
 try {
     if (isset($_SESSION['user'])AND ($_SESSION['user']=='admin')) 
     {
+        
         if(isset($_GET['action'])AND ($_GET['action']=='enablePost')AND (isset($_GET['id'])))
         {
             
@@ -62,7 +63,18 @@ try {
         elseif(isset($_GET['action'])AND ($_GET['action']=='addPost'))
         {
         ajouterPost();
-        }else{
+        }
+        
+        elseif(isset ($_GET['action']) AND ($_GET['action']=='upload') AND ($_POST['postId']))
+        {
+         
+     /*upload($_POST['fichier'],'uploads/',$_POST['MAX_FILE_SIZE'], array('jpg','jpeg') );
+         */
+   
+         } 
+        
+        else{
+        
        listPosts();
         }
         
