@@ -8,7 +8,8 @@ while ($data = $posts->fetch())
 ?>
 
 
-    <li><a href="index.php?action=post&id=<?= $data['ART_ID']?>">Chap <?= $data['ART_CHAPTER']?> :<?=$data['ART_TITLE']?> </a>
+    
+<li><a href="post<?= $data['ART_ID']?>-chapitre<?=$data['ART_CHAPTER']?>">Chap <?= $data['ART_CHAPTER']?> :<?=$data['ART_TITLE']?> </a>
     </li>
 
 
@@ -50,7 +51,7 @@ $keywords = $data['ART_KEYWORDS'];
 
         <h2>Votre commentaire</h2>
 
-        <form action="index.php?action=addComment&amp;id=<?= $data['ART_ID'] ?>" method="post">
+        <form action="commentaire<?= $data['ART_ID'] ?>" method="post">
             <div>
                 <input type="hidden" id="postId" name="postId" value="<?= $data['ART_ID'] ?>" />
                 <label for="author">Auteur</label><br />
@@ -82,7 +83,7 @@ while ($comment = $comments->fetch())
      if($commentSignale){ 
     echo '<i class="fa fa-thumbs-down  fa-2x red"></i>';
     }else{
-          echo '<a href="index.php?action=enableSignal&amp;commId='.$comment['COMM_ID'].'&amp;id='.$data['ART_ID'].'" title="Cliquez pour signaler le commentaire"><i class="fa fa-thumbs-o-up  fa-2x vert"></i></a>';   
+          echo '<a href="signalement'.$comment['COMM_ID']."-".$data['ART_ID'].'" title="Cliquez pour signaler le commentaire"><i class="fa fa-thumbs-o-up  fa-2x vert"></i></a>';   
          
      }
  ?>

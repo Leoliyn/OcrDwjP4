@@ -1,6 +1,6 @@
 
 
-<?php $title = 'Jean FORTEROCHE Billet pour l\'ALASKA '; ?>
+<?php $title = 'Jean FORTEROCHE Billet simple pour l\'ALASKA '; ?>
 
 
 
@@ -38,17 +38,20 @@ while ($data = $posts->fetch())
 
 
   
-    <li><a href="index.php?action=post&id=<?= $data['ART_ID']?>">Chap <?= $data['ART_CHAPTER']?> :<?=$data['ART_TITLE']?> </a>
+    <li><a href="post<?= $data['ART_ID']?>-chapitre<?=$data['ART_CHAPTER']?>">Chap <?= $data['ART_CHAPTER']?> :<?=$data['ART_TITLE']?> </a>
 </li>
 <?php   
 
-$contentMenu .= "<li><a href='index.php?action=post&id=";
- $contentMenu .= $data['ART_ID'];
- $contentMenu .="'>Chap";
+$contentMenu .= "<li><a href='post";
+$contentMenu .= $data['ART_ID'];
+$contentMenu .= "-chapitre";
+$contentMenu .= $data['ART_CHAPTER'];
+ 
+$contentMenu .="'>Chap";
 $contentMenu .=$data['ART_CHAPTER'];
-    $contentMenu .=":";
-        $contentMenu .=$data['ART_TITLE'];
-             $contentMenu .="</a></li>";
+$contentMenu .=":";
+$contentMenu .=$data['ART_TITLE'];
+$contentMenu .="</a></li>";
 }
 $posts->closeCursor();
 ?>
@@ -68,7 +71,7 @@ $posts->closeCursor();
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
       <li data-target="#myCarousel" data-slide-to="1"></li>
       <li data-target="#myCarousel" data-slide-to="2"></li>
-        <li data-target="#myCarousel" data-slide-to="3"></li>
+    <li data-target="#myCarousel" data-slide-to="3"></li>
         <li data-target="#myCarousel" data-slide-to="4"></li>
      
     </ol>

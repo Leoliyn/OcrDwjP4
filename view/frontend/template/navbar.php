@@ -30,6 +30,7 @@
               echo '<li><a href="#tour">RENDEZ-VOUS</a></li>';
               echo '<li><a href="#contact">CONTACT</a></li>';
                 ?>   
-        </div>
+            </ul>
+                </div>
     </div>
 </nav>
