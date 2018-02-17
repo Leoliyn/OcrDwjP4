@@ -42,10 +42,12 @@ function post()
 {
     $postManager = new OpenClassrooms\DWJP4\frontend\Model\PostManager();
     $commentManager = new OpenClassrooms\DWJP4\frontend\Model\CommentManager();
-
+ $bookManager = new OpenClassrooms\DWJP4\frontend\Model\BookManager();
     $article = $postManager->getPost($_GET['id']);
     $comments = $commentManager->getComments($_GET['id']);
+     $books = $bookManager->getBooks();
    $posts = $postManager->getPostsResume();
+   
     require('view/frontend/postView.php');
 }
 

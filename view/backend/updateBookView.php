@@ -7,7 +7,7 @@
 <?php
 
 $data=$book;
-echo $data['OUV_ID'];
+
 ?>
 <div class='resume'>
 
@@ -27,7 +27,7 @@ echo $data['OUV_ID'];
         <label> Mots clés (séparés par une virgule)</label><input style="width: 100%;" name="ouv_keywords" id="ouv_keywords"  value="<?= $data['OUV_KEYWORDS'] ?>"/><br />   
         <input class="btn btn-primary" type="submit" name="send" value="Envoyer" />
         <input class="btn btn-primary" type="reset" name="reset" value="Reset" />
-        <a href="indexadmin.php?action=book&amp;id=<?= $data['ART_ID'] ?>"><input class="btn btn-primary" type="button" name="retour" value="Retour" /></a>
+        <a href="indexadmin.php?action=book&amp;id=<?= $data['OUV_ID'] ?>"><input class="btn btn-primary" type="button" name="retour" value="Retour" /></a>
         </form>
    
 

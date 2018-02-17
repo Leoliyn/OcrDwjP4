@@ -1,8 +1,3 @@
-
-
-
-
-
 <?php ob_start(); ?>
 <div class="col-sm-4">
          <img src='public/images/couverture2.jpg' title='couverture ouvrage' />
@@ -35,24 +30,40 @@ $contentMenu="";
 while ($data = $posts->fetch())
 {
 
-?>  
-
-
+setlocale(LC_CTYPE, 'fr_FR.UTF-8');
+$titre= iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $data['ART_TITLE']);
+$titre = strtr($titre, " '@ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ","--aAAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy");
+?>
   
-    <li><a href="post<?= $data['ART_ID']?>-chapitre<?=$data['ART_CHAPTER']?>">Chap <?= $data['ART_CHAPTER']?> :<?=$data['ART_TITLE']?> </a>
+    <li><a href="chapitre<?=$data['ART_CHAPTER']?>.<?= $titre ?>.<?=$data['ART_ID']?>.html">chapitre<?=$data['ART_CHAPTER']?>-<?= $data['ART_TITLE'] ?> </a>
 </li>
 <?php   
 
-$contentMenu .= "<li><a href='post";
-$contentMenu .= $data['ART_ID'];
-$contentMenu .= "-chapitre";
+//$contentMenu .= "<li><a href='post";
+//$contentMenu .= $data['ART_ID'];
+//$contentMenu .= "-chapitre";
+//$contentMenu .= $data['ART_CHAPTER'];
+// 
+//$contentMenu .="'>Chap";
+//$contentMenu .=$data['ART_CHAPTER'];
+//$contentMenu .=":";
+//$contentMenu .=$data['ART_TITLE'];
+//$contentMenu .="</a></li>";
+
+$contentMenu .= "<li><a href='chapitre";
 $contentMenu .= $data['ART_CHAPTER'];
- 
-$contentMenu .="'>Chap";
+$contentMenu .= ".";
+$contentMenu .= $titre;
+$contentMenu .= "."; 
+$contentMenu .=$data['ART_ID'];
+$contentMenu .=".html'>";
 $contentMenu .=$data['ART_CHAPTER'];
 $contentMenu .=":";
 $contentMenu .=$data['ART_TITLE'];
 $contentMenu .="</a></li>";
+
+
+
 }
 $posts->closeCursor();
 ?>

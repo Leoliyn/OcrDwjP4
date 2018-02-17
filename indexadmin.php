@@ -19,9 +19,27 @@ try {
         desactiverPost();
             
         }
+        ////
+           if(isset($_GET['action'])AND ($_GET['action']=='enableBook')AND (isset($_GET['id'])))
+        {
+            
+        activerBook();
+                
+        }
+        elseif(isset($_GET['action'])AND ($_GET['action']=='disableBook')AND (isset($_GET['id'])))
+        {
+        desactiverBook();
+            
+        }
+        ////
         elseif(isset($_GET['action'])AND ($_GET['action']=='delPost')AND (isset($_GET['id'])))
         {
          supprimePost();
+            
+        }
+        elseif(isset($_GET['action'])AND ($_GET['action']=='delOuvrage')AND (isset($_GET['id'])))
+        {
+         supprimeOuvrage();
             
         }
         elseif(isset($_GET['action'])AND ($_GET['action']=='post')AND (isset($_GET['id'])))
@@ -49,14 +67,29 @@ try {
         {
           formModifyPost();
         }
+        elseif(isset($_GET['action'])AND ($_GET['action']=='updateBook')AND (isset($_GET['id'])))
+        {
+          formModifyBook();
+        }
         elseif(isset($_GET['action'])AND ($_GET['action']=='majPost'))
         {
           majPost();
         }
-        
+        elseif(isset($_GET['action'])AND ($_GET['action']=='majBook'))
+        {
+          majBook();
+        }
         elseif(isset($_GET['action'])AND ($_GET['action']=='newPost'))
         {
          formNewPost();
+        }
+         elseif(isset($_GET['action'])AND ($_GET['action']=='newBook'))
+        {
+         formNewBook();
+        }
+        elseif(isset($_GET['action'])AND ($_GET['action']=='book')AND (isset($_GET['id'])))
+        {
+         book();
         }
         
         
@@ -64,7 +97,14 @@ try {
         {
         ajouterPost();
         }
-        
+        elseif(isset($_GET['action'])AND ($_GET['action']=='addBook'))
+        {
+        ajouterOuvrage();
+        }
+        elseif(isset($_GET['action'])AND ($_GET['action']=='listBooks'))
+        {
+        listOuvrages();
+        }
         elseif(isset ($_GET['action']) AND ($_GET['action']=='upload') AND ($_POST['postId']))
         {
          

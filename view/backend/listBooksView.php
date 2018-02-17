@@ -4,7 +4,7 @@
 
 <?php ob_start(); ?>
 <div class='resume'>
-<a href="indexadmin.php?action=addBook" title="Ajouter un ouvrage"><i class="fa fa-plus-square  fa-4x "></i>   Ajouter un ouvrage..</a>
+<a href="indexadmin.php?action=newBook" title="Ajouter un ouvrage"><i class="fa fa-plus-square  fa-4x "></i>   Ajouter un ouvrage..</a>
 </div>
 <?php
 while ($data = $books->fetch())
@@ -13,12 +13,13 @@ while ($data = $books->fetch())
 
     <div class='resume'>
         
-        <h3>
-            <p>Titre:  <?= $data['OUV_TITRE'] ?></p>
-            <?= $data['OUV_SOUSTITRE'] ?> de <?= $data['OUV_AUTEUR'] ?>
+        <h2>
+            <p>Titre:  <?= $data['OUV_TITRE'] ?></p> </h2>
+        
+        <h3> <?= $data['OUV_SOUSTITRE'] ?> </h3>de <strong><?= $data['OUV_AUTEUR'] ?> </strong>          
+        
             
-        </h3>
-       
+               
         <p><em>Description :  <?= $data['OUV_DESCRIPTION'] ?></em></p>
    <div class='contenu'>
             <?php 
@@ -42,11 +43,11 @@ while ($data = $books->fetch())
      
   
 
-            <a href="#" data-toggle="modal" data-target="#deleteModal<?= $data['ART_ID'] ?>" title="Supprimez l'ouvrage"><i class="fa fa-remove  fa-2x"></i></a>
+            <a href="#" data-toggle="modal" data-target="#deleteModal<?= $data['OUV_ID'] ?>" title="Supprimez l'ouvrage"><i class="fa fa-remove  fa-2x"></i></a>
           </div> 
     </div>
 <!-- Modal -->
-  <div class="modal fade" id="deleteModal<?= $data['ART_ID'] ?>" role="dialog">
+  <div class="modal fade" id="deleteModal<?= $data['OUV_ID'] ?>" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->

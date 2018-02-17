@@ -4,7 +4,7 @@ namespace OpenClassrooms\DWJP4\backend\Model;
 
 require_once("model/backend/Manager.php");
 
-class bookManager extends Manager
+class BookManager extends Manager
 {
    
     public function getBooks()
@@ -21,23 +21,24 @@ class bookManager extends Manager
     public function getBook($bookId)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT OUV_ID, OUV_TITRE,OUV_PREFACE,OUV_SOUSTITRE,OUV_AUTEUR,OUV_DESCRIPTION,OUV_KEYWORDS,OUV_ENABLE FROM posts WHERE OUV_ID = ?');
-        $req->execute(array($postId));
-        $post = $req->fetch();
+        $req = $db->prepare('SELECT OUV_ID, OUV_TITRE,OUV_PREFACE,OUV_SOUSTITRE,OUV_AUTEUR,OUV_DESCRIPTION,OUV_KEYWORDS,OUV_ENABLE FROM ouvrage WHERE OUV_ID = ?');
+        $req->execute(array($bookId));
+        $book = $req->fetch();
 
-        return $post;
+        return $book;
     }
     
-public function addBook($title,$preface,$subtitle,$auteur,$description,$keywords,$enable)
+public function addBook($title,$preface,$subtitle,$auteur,$description,$keywords)
     {
     
    
     $db = $this->dbConnect();
-    $req = $db->prepare('INSERT into ouvrage (OUV_TITRE,OUV_PREFACE,OUV_SOUSTITRE,OUV_AUTEUR,OUV_DESCRIPTION,OUV_KEYWORDS,OUV_ENABLE) VALUES(?,?,?,?,?,?)');
-    $req->execute(array( $title,$preface,$subtitle,$auteur,$description,$keywords,$enable)); 
-    return $req;     
-     
-    }
+    $req2 =$db->prepare('UPDATE ouvrage SET  OUV_ENABLE = ? WHERE 1');
+    $req2->execute(array(0)); 
+    $req = $db->prepare('INSERT into ouvrage (OUV_TITRE,OUV_PREFACE,OUV_SOUSTITRE,OUV_AUTEUR,OUV_DESCRIPTION,OUV_KEYWORDS,OUV_ENABLE) VALUES(?,?,?,?,?,?,?)');
+    $req->execute(array( $title,$preface,$subtitle,$auteur,$description,$keywords,1)); 
+    return $req;    
+         }
     
     public function delBook($id)
     {
@@ -61,16 +62,16 @@ public function addBook($title,$preface,$subtitle,$auteur,$description,$keywords
     {
     
     $db = $this->dbConnect();
-    $req = $db->prepare('UPDATE ouvrage SET  ART_ENABLE = ? WHERE OUV_ID= ?');
-    $req->execute(array( 1,$id));        
+    $req = $db->prepare('UPDATE ouvrage SET  OUV_ENABLE = 1 WHERE OUV_ID= ?');
+    $req->execute(array($id));        
      return $req;   
     }
     
     public function disableBook($id)
     {
     $db = $this->dbConnect();
-    $req = $db->prepare('UPDATE ouvrage SET  ART_ENABLE = ? WHERE OUV_ID= ?');
-    $req->execute(array( 0,$id));        
+    $req = $db->prepare('UPDATE ouvrage SET  OUV_ENABLE = 0 WHERE OUV_ID= ?');
+    $req->execute(array($id));        
     return $req;    
     }
     

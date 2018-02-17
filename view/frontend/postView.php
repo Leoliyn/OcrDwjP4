@@ -1,17 +1,26 @@
 <?php $title = 'Jean FORTEROCHE Billet simple pour l\'ALASKA '; ?>
 <?php ob_start();?>
+<?php 
+while ($dataBook = $books->fetch())
+{
+$auteur = $dataBook['OUV_AUTEUR'];
+$description =$dataBook['OUV_DESCRIPTION'];
+$bookPreface =$dataBook['OUV_PREFACE'];
+$bookTitre =$dataBook['OUV_TITRE'];
+$bookSoustitre =$dataBook['OUV_SOUSTITRE']; 
+$title= $auteur." ".$bookTitre;
+}
 
-<?php
 while ($data = $posts->fetch())
 {
 
+setlocale(LC_CTYPE, 'fr_FR.UTF-8');
+$titre0= iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $data['ART_TITLE']);
+$titre = strtr($titre0, " '@ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ","--aAAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy");
 ?>
 
-
-    
-<li><a href="post<?= $data['ART_ID']?>-chapitre<?=$data['ART_CHAPTER']?>">Chap <?= $data['ART_CHAPTER']?> :<?=$data['ART_TITLE']?> </a>
-    </li>
-
+<li><a href="chapitre<?=$data['ART_CHAPTER']?>.<?= $titre ?>.<?=$data['ART_ID']?>.html">chapitre<?=$data['ART_CHAPTER']?>-<?= $data['ART_TITLE'] ?> </a>
+</li>
 
     <?php
 
