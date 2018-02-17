@@ -63,7 +63,20 @@ public function getPostsResume()
     $req2 =  $db->prepare('DELETE FROM comments WHERE COMM_ARTID = ?'); 
     $req->execute(array($id));  
     $req2->execute(array($id));
-        return $req;     
+    //////////Suppression de l'mage associée///////////
+    $dossier_traite = "uploads";
+    $fichier = $id;
+    $fichier .=  ".jpg"  ;
+    $chemin = $dossier_traite."/".$fichier; // On définit le chemin du fichier à effacer.
+    $repertoire = opendir($dossier_traite); 
+    if(file_exists ( $chemin )){
+     if ($fichier != ".." AND $fichier != "." AND !is_dir($fichier))
+      {
+      unlink($chemin); // On efface.
+     }  
+    }
+closedir($repertoire); 
+  return $req;     
         
     }
     public function updatePost($chapter,$title,$subtitle,$content,$disable,$id,$description,$keywords)

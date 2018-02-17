@@ -27,6 +27,7 @@
         <input class="btn btn-primary" type="reset" name="reset" value="Reset" />
         <a href="indexadmin.php"><input class="btn btn-primary" type="button" name="retour" value="Retour" /></a>
         </form>
+    
 </div>
 
 

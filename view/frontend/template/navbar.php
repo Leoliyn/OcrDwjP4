@@ -6,18 +6,17 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-            <a class="navbar-brand" href="#">
-                Jean FORTEROCHE
-                <?php echo '<i style ="font-size:12px">Billet pour l\'ALASKA</i>';?>
-                
-            </a>
+            <a class="navbar-brand" href="index.php">
+                <?= $auteur ?>
+                <i style ="font-size:12px"><?= $bookTitre ?></i>
+                            </a>
             
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
                
             <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">LES CHAPITRES
+                        <a class="dropdown-toggle  animate slideInUp" data-toggle="dropdown" href="#">LES CHAPITRES
           <span class="caret"></span></a>
                         <ul class="dropdown-menu">
         
@@ -27,7 +26,6 @@
         
               echo '<li><a href="index.php">ACCUEIL</a></li>';
               echo '<li><a href="#band">PERSONNAGES</a></li>';
-              echo '<li><a href="#tour">RENDEZ-VOUS</a></li>';
               echo '<li><a href="#contact">CONTACT</a></li>';
                 ?>   
             </ul>

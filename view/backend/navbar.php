@@ -6,7 +6,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-            <a class="navbar-brand" href="#myPage">
+            <a class="navbar-brand" href="indexadmin.php">
                ADMINISTRATION  
                <i style ="font-size:8px">(Blog de Jean FORTEROCHE)</i>
                 

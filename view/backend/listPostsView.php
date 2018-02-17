@@ -4,7 +4,7 @@
 
 <?php ob_start(); ?>
 <div class='resume'>
-<a href="indexadmin.php?action=newPost&amp;id=<?= $data['ART_ID'] ?>" title="Ajouter un article"><i class="fa fa-plus-square  fa-4x "></i>   Ajouter un chapitre..</a>
+<a href="indexadmin.php?action=newPost" title="Ajouter un article"><i class="fa fa-plus-square  fa-4x "></i>   Ajouter un chapitre..</a>
 </div>
 <?php
 while ($data = $posts->fetch())

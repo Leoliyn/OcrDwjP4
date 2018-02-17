@@ -11,7 +11,7 @@
 
     <?php require_once 'view/frontend/template/sectionArticle.php';?>
     <?php require_once 'view/frontend/template/sectionPersonnage.php';?>
-    <?php require_once 'view/frontend/template/sectionTournee.php';?>
+   
     <?php require_once 'view/frontend/template/sectionContact.php';?>
     <?php require_once 'view/frontend/template/sectionFooter.php';?>
 </body>

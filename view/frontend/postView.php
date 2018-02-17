@@ -1,4 +1,4 @@
-<?php $title = 'Jean FORTEROCHE Billet pour l\'ALASKA '; ?>
+<?php $title = 'Jean FORTEROCHE Billet simple pour l\'ALASKA '; ?>
 <?php ob_start();?>
 
 <?php
