@@ -11,7 +11,7 @@ class PostManager extends Manager
     {
         
         $db = $this->dbConnect();
-        $req = $db->query('SELECT ART_ID, ART_CHAPTER,ART_TITLE,ART_SUBTITLE,ART_CONTENT, DATE_FORMAT(DATE, \'%d/%m/%Y à %Hh%imin%ss\') AS DATE_fr,ART_DESCRIPTION,ART_KEYWORDS FROM posts WHERE ART_DESACTIVE = 0 ORDER BY ART_CHAPTER DESC ');
+        $req = $db->query('SELECT ART_ID, ART_CHAPTER,ART_TITLE,ART_SUBTITLE,ART_CONTENT, DATE_FORMAT(DATE, \'%d/%m/%Y à %Hh%imin%ss\') AS DATE_fr,ART_DESCRIPTION,ART_KEYWORDS,ART_IMAGE FROM posts WHERE ART_DESACTIVE = 0 ORDER BY ART_CHAPTER DESC ');
 
         return $req;
     }
@@ -26,7 +26,7 @@ public function getPostsResume()
   COUNT(comments.COMM_ARTID) AS NBCOMMENT FROM posts LEFT JOIN comments ON posts.ART_ID = comments.COMM_ARTID group by posts.ART_TITLE ORDER BY ART_CHAPTER DESC ');
      */   
     $req = $db->query('SELECT ART_ID, LEFT(`ART_CONTENT`,300) AS ART_CONTENT,ART_CHAPTER,ART_TITLE,ART_SUBTITLE,
-    DATE_FORMAT(DATE, \'%d/%m/%Y à %Hh%imin%ss\') AS DATE_fr,ART_DESACTIVE, COUNT(comments.COMM_ARTID) AS NBCOMMENT FROM posts 
+    DATE_FORMAT(DATE, \'%d/%m/%Y à %Hh%imin%ss\') AS DATE_fr,ART_DESACTIVE,ART_IMAGE, COUNT(comments.COMM_ARTID) AS NBCOMMENT FROM posts 
     LEFT JOIN comments ON posts.ART_ID = comments.COMM_ARTID group by posts.ART_TITLE ORDER BY ART_CHAPTER DESC ');
     
    
@@ -38,20 +38,20 @@ public function getPostsResume()
     public function getPost($postId)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT ART_ID,ART_CHAPTER,ART_TITLE,ART_SUBTITLE,ART_CONTENT, ART_DESACTIVE,DATE_FORMAT(DATE, \'%d/%m/%Y à %Hh%imin%ss\') AS DATE_fr,ART_DESCRIPTION,ART_KEYWORDS FROM posts WHERE ART_ID = ?');
+        $req = $db->prepare('SELECT ART_ID,ART_CHAPTER,ART_TITLE,ART_SUBTITLE,ART_CONTENT, ART_DESACTIVE,DATE_FORMAT(DATE, \'%d/%m/%Y à %Hh%imin%ss\') AS DATE_fr,ART_DESCRIPTION,ART_KEYWORDS,ART_IMAGE FROM posts WHERE ART_ID = ?');
         $req->execute(array($postId));
         $post = $req->fetch();
 
         return $post;
     }
     
-    public function addPost($chapter,$title,$subtitle,$content,$description,$keywords)
+    public function addPost($chapter,$title,$subtitle,$content,$description,$keywords,$image)
     {
     
     $date =(new \DateTime())->format('Y-m-d H:i:s');   
     $db = $this->dbConnect();
-    $req = $db->prepare('INSERT into posts (ART_CHAPTER,ART_TITLE,ART_SUBTITLE,ART_CONTENT,DATE,ART_DESACTIVE,ART_DESCRIPTION,ART_KEYWORDS) VALUES(?,?,?,?,?,?,?,?)');
-    $req->execute(array( $chapter,$title,$subtitle,$content,$date,1,$description,$keywords)); 
+    $req = $db->prepare('INSERT into posts (ART_CHAPTER,ART_TITLE,ART_SUBTITLE,ART_CONTENT,DATE,ART_DESACTIVE,ART_DESCRIPTION,ART_KEYWORDS,ART_IMAGE) VALUES(?,?,?,?,?,?,?,?,?)');
+    $req->execute(array( $chapter,$title,$subtitle,$content,$date,1,$description,$keywords,$image)); 
     return $req;     
      
     }
@@ -83,8 +83,8 @@ closedir($repertoire);
     {
     $date =(new \DateTime())->format('Y-m-d H:i:s');
     $db = $this->dbConnect();
-    $req = $db->prepare('UPDATE posts SET  ART_CHAPTER =?,ART_TITLE=?,ART_SUBTITLE=?,ART_CONTENT=?, DATE= ?,ART_DESACTIVE =?,ART_DESCRIPTION= ?,ART_KEYWORDS=? WHERE ART_ID= ?');
-    $req->execute(array( $chapter,$title,$subtitle,$content,$date,$disable,$description,$keywords,$id));     
+    $req = $db->prepare('UPDATE posts SET  ART_CHAPTER =?,ART_TITLE=?,ART_SUBTITLE=?,ART_CONTENT=?, DATE= ?,ART_DESACTIVE =?,ART_DESCRIPTION= ?,ART_KEYWORDS=?,ART_IMAGE=? WHERE ART_ID= ?');
+    $req->execute(array( $chapter,$title,$subtitle,$content,$date,$disable,$description,$keywords,$image,$id));     
         
     }
     public function enablePost($id)

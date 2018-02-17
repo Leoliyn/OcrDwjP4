@@ -12,7 +12,7 @@ while ($data = $posts->fetch())
 ?>
 
     <div class='resume'>
-        
+        <img src='./uploads/<?= $data['ART_IMAGE'] ?>' class="miniature" />
         <h3>
             <p>Chapitre:  <?= $data['ART_CHAPTER'] ?></p>
             <?= $data['ART_TITLE'] ?>
