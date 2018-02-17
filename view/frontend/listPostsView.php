@@ -27,6 +27,10 @@ $title= $auteur." ".$bookTitre;
    <ul>
 <?php
 $contentMenu="";
+$iteration=0;
+ $listeCarousel ='<div id="myCarousel" class="carousel slide" data-ride="carousel"><ol class="carousel-indicators">';
+ $carousel ='<div class="carousel-inner" role="listbox">';
+
 while ($data = $posts->fetch())
 {
 
@@ -61,10 +65,40 @@ $contentMenu .=$data['ART_CHAPTER'];
 $contentMenu .=":";
 $contentMenu .=$data['ART_TITLE'];
 $contentMenu .="</a></li>";
+////////////////////////////////////creation liste ol slider///////////////////////
+  $listeCarousel .= '<li data-target="#myCarousel" data-slide-to="';
+   $listeCarousel .= $iteration;
+ $listeCarousel .= '" class="';
+  if($iteration==0){
+    $listeCarousel .= 'active">';
+   }else {
+   $listeCarousel .= '">';
+   
+    }
+   $listeCarousel .= '</li>';   
 
-
-
+////////////////////carousel/////////////////////
+   $carousel .= '<div class="item '; 
+   ////
+   if($iteration==0){
+    $carousel .= 'active">';
+    }else {
+   $carousel .= '">';
+   
+    }
+   
+  $carousel .='<img src="uploads/'.$data['ART_IMAGE'].'" alt="illustration chapitre" width="1200" height="700">';
+  $carousel .='<div class="carousel-caption">';
+  $carousel .='<a href="chapitre'.$data['ART_CHAPTER'].'.'.$titre.'.'.$data['ART_ID'].'.html"><h3>'.$data['ART_TITLE']." Chapitre ".$data['ART_CHAPTER'].'</h3>';
+  $carousel .='<p>'.$data['ART_SUBTITLE'].'</p></a>';
+  $carousel .='</div></div>';
+  
+  
+///////////////////
+   $iteration = $iteration +1; 
 }
+ $listeCarousel .= '</ol>'; 
+ $carousel .='</div>';
 $posts->closeCursor();
 ?>
 </ul>
@@ -77,57 +111,56 @@ $posts->closeCursor();
 
 <?php ob_start(); ?>
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-    <li data-target="#myCarousel" data-slide-to="3"></li>
-        <li data-target="#myCarousel" data-slide-to="4"></li>
+  
+    <?php
+    //  $listeCarousel ='<ol class="carousel-indicators">';
+   // $carousel ='<div class="carousel-inner" role="listbox">';
+   // $iteration=0;
+ //   $carousel ='<div id="myCarousel" class="carousel slide" data-ride="carousel">';
+   // while ($data = $posts->fetch())
+// 
      
-    </ol>
+//   $listeCarousel .= '<li data-target="#myCarousel" data-slide-to="';
+//   $listeCarousel .= $iteration;
+//   $listeCarousel .= 'class="';
+//  if($iteration==0){
+//    $listeCarousel .= 'active';
+//    }else {
+//   $listeCarousel .= '';
+//   
+//    }
+//   $listeCarousel .= '"></li>';   
+  //$iteration = $iteration +1;
+  // $carousel .= '<div class="carousel-inner" role="listbox">
+    //  <div class="item '; 
+   //////
+  // if($iteration==0){
+  //  $carousel .= 'active';
+ //   }else {
+//   $carousel .= '';}
+    /////
+//   $carousel .= '">';
+//  $carousel .='<img src="uploads/';
+//  $carousel .=$data['ART_IMAGE'];
+//  $carousel .= '" alt="';
+//  $carousel .=$data['ART_DESCRIPTION'];
+//  $carousel.= '" width="1200" height="700">';
+//  $carousel .='<div class="carousel-caption">';
+//  $carousel .='<h3>'.$data['ART_TITLE'].$data['ART_CHAPTER'].'</h3>';
+//  $carousel .='<p>'.$data['ART_SUBTITLE'].'</p>';
+//  $carousel .='  </div>  </div>';
 
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-      <div class="item active">
-        <img src="public/images/1.jpg" alt="New York" width="1200" height="700">
-        <div class="carousel-caption">
-          <h3>Jo CASH</h3>
-          <p>militibus omne latus Isauriae defendentibus adsueti.</p>
-        </div>      
-      </div>
+   
+   
+   
+  // }
+   // $listeCarousel .= '</ol>'.$iteration; 
+    //$carousel .='</div>';
+      
+ ?>   
 
-      <div class="item">
-        <img src="public/images/2.jpg" alt="Chicago" width="1200" height="700">
-        <div class="carousel-caption">
-          <h3>Juneau</h3>
-          <p>posse dicere et in illis quidem parandis adhibere curam.</p>
-        </div>      
-      </div>
-    
-      <div class="item">
-        <img src="public/images/3.jpg" alt="Los Angeles" width="1200" height="700">
-        <div class="carousel-caption">
-          <h3>Anchorage</h3>
-          <p>cuius generis est magna penuria.</p>
-        </div>      
-      </div>
-         <div class="item">
-        <img src="public/images/4.jpg" alt="Los Angeles" width="1200" height="700">
-        <div class="carousel-caption">
-          <h3>Houston</h3>
-          <p>illis semper in fuga uxoresque mercenariae Venice.</p>
-        </div>      
-      </div>
-         <div class="item">
-        <img src="public/images/4.jpg" alt="Los Angeles" width="1200" height="700">
-        <div class="carousel-caption">
-          <h3>Retour ?</h3>
-          <p>futura coniunx hastam.</p>
-        </div>      
-      </div>
-    </div>
+<?= $listeCarousel ?>
+<?= $carousel ?>
 
     <!-- Left and right controls -->
     <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -138,7 +171,10 @@ $posts->closeCursor();
       <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>
+
 </div>
+
+
 
 <?php $slider = ob_get_clean();?>
 

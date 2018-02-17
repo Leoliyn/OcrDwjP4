@@ -121,13 +121,13 @@ while ($comment = $comments->fetch())
 
                 <div class="carousel-inner" role="listbox">
                     <div class="item active">
-                        <?php
+            <?php
         $filename= "uploads/";
-        $filename .= $data['ART_ID'];
-        $filename .=".jpg" ;
+        $filename .= $data['ART_IMAGE'];
+    
          if (file_exists($filename)) {
                        ?>
-                            <img src="uploads/<?= $data['ART_ID'] ?>.jpg" alt="illustration <?= $data['ART_TITLE'] ?><?= $data['ART_SUBTITLE'] ?><?= $data['ART_CHAPTER'] ?>" width="1200" height="700">
+                            <img src="uploads/<?= $data['ART_IMAGE'] ?>" alt="illustration <?= $data['ART_TITLE'] ?><?= $data['ART_SUBTITLE'] ?><?= $data['ART_CHAPTER'] ?>" width="1200" height="700">
                             <?php 
          }else{ ?>
                             <img src="public/images/1.jpg" alt="illustration <?= $data['ART_TITLE'] ?>" "<?= $data['ART_SUBTITLE'] ?>" Chapitre "<?= $data['ART_CHAPTER'] ?>" width="1200" height="700">
