@@ -67,17 +67,51 @@ function formNewPost()
 function formNewBook()
 {
 
-    require('view/backend/newBookView.php');
+require('view/backend/newBookView.php');
 }
+function uploadImage($postId){
+   
+    $postManager = new OpenClassrooms\DWJP4\Backend\Model\PostManager();
+    $article = $postManager->getPost($postId);
+    $image =$article['ART_IMAGE'];/// récupération
+   
+    
+     if(!empty($_FILES['uploaded_file']['name']))
+  {
+ $extensions_valides = array('jpg');
+//1. strrchr renvoie l'extension avec le point (« . »).
+//2. strtolower met l'extension en minuscules.
+$extension_upload = strtolower(  strrchr($_FILES['uploaded_file']['name'], '.')  );
+$path = "uploads/";
+$_FILES['uploaded_file']['name']= 'chapitre-'.$article['ART_CHAPTER'].$extension_upload ;
+$path = $path . basename( $_FILES['uploaded_file']['name']);
+echo $path  ;
+if ( in_array($extension_upload,$extensions_valides) ) {
+    }elseif(move_uploaded_file($_FILES['uploaded_file']['tmp_name'], $path)) {
+      $message = "Le fichier ".  basename( $_FILES['uploaded_file']['name']). 
+      " à été uploadé";
+     $image = $_FILES['uploaded_file']['name'];
+    } else{
+  $message= "Une erreur s'est produite durant l'opération Veuillez vérifier le format du fichier( jpg , jpeg , gif , 'png). Veuillez réessayer . Si le problème persiste , contactez votre administrateur ";
+    }
+  }  else {
+ 
+  }
+  return $image;
+  }
+ 
 
 ////////////Lorsqu'on met à jour un article on le desactive par defaut ////////////////
 
 function majPost()
 {
+    
+    $image= uploadImage($_POST['art_id']);
+ 
  $postManager = new OpenClassrooms\DWJP4\Backend\Model\PostManager();
     /* $article = $postManager->updatePost($_POST['art_chapter'],$_POST['art_title'],$_POST['art_subtitle'],$_POST['art_content'],$_POST['art_desactive'],$_POST['art_id']);
     $_GET['id'] = $_POST['art_id']; */
-    $article = $postManager->updatePost($_POST['art_chapter'],$_POST['art_title'],$_POST['art_subtitle'],$_POST['art_content'],1,$_POST['art_id'],$_POST['art_description'],$_POST['art_keywords']);
+    $article = $postManager->updatePost($_POST['art_chapter'],$_POST['art_title'],$_POST['art_subtitle'],$_POST['art_content'],1,$_POST['art_id'],$_POST['art_description'],$_POST['art_keywords'],$image);
     $_GET['id'] = $_POST['art_id']; 
    post();
 } 
@@ -93,6 +127,7 @@ function majBook()
 } 
  function ajouterPost()   
  {
+   
    $postManager = new OpenClassrooms\DWJP4\Backend\Model\PostManager();
      $article = $postManager->addPost($_POST['art_chapter'],$_POST['art_title'],$_POST['art_subtitle'],$_POST['art_content'],$_POST['art_description'],$_POST['art_keywords']);
     

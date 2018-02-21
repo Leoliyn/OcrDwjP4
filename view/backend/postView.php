@@ -10,7 +10,16 @@
 $data=$article;
 ?>
     <div class='resume'>
-        
+      <?php
+      if (isset($message)){
+          
+       echo $message ;
+       
+          
+          
+      }  
+      
+      ?>
         <h3>
             <?= htmlspecialchars($data['ART_TITLE']) ?>
             

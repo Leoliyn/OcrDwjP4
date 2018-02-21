@@ -45,13 +45,13 @@ public function getPostsResume()
         return $post;
     }
     
-    public function addPost($chapter,$title,$subtitle,$content,$description,$keywords,$image)
+    public function addPost($chapter,$title,$subtitle,$content,$description,$keywords)
     {
     
     $date =(new \DateTime())->format('Y-m-d H:i:s');   
     $db = $this->dbConnect();
-    $req = $db->prepare('INSERT into posts (ART_CHAPTER,ART_TITLE,ART_SUBTITLE,ART_CONTENT,DATE,ART_DESACTIVE,ART_DESCRIPTION,ART_KEYWORDS,ART_IMAGE) VALUES(?,?,?,?,?,?,?,?,?)');
-    $req->execute(array( $chapter,$title,$subtitle,$content,$date,1,$description,$keywords,$image)); 
+    $req = $db->prepare('INSERT into posts (ART_CHAPTER,ART_TITLE,ART_SUBTITLE,ART_CONTENT,DATE,ART_DESACTIVE,ART_DESCRIPTION,ART_KEYWORDS) VALUES(?,?,?,?,?,?,?,?)');
+    $req->execute(array( $chapter,$title,$subtitle,$content,$date,1,$description,$keywords)); 
     return $req;     
      
     }
@@ -59,27 +59,32 @@ public function getPostsResume()
     public function delPost($id)
     {
     $db = $this->dbConnect();
-    $req = $db->prepare('DELETE FROM posts WHERE ART_ID = ?');
-    $req2 =  $db->prepare('DELETE FROM comments WHERE COMM_ARTID = ?'); 
-    $req->execute(array($id));  
-    $req2->execute(array($id));
+    $req0 = $db->prepare('SELECT ART_IMAGE FROM posts WHERE ART_ID = ?');
+    $req0->execute(array($id));
+    $image = $req0->fetch();
     //////////Suppression de l'mage associée///////////
     $dossier_traite = "uploads";
-    $fichier = $id;
-    $fichier .=  ".jpg"  ;
+    $fichier = $image['ART_IMAGE'];
+    var_dump($image);
     $chemin = $dossier_traite."/".$fichier; // On définit le chemin du fichier à effacer.
     $repertoire = opendir($dossier_traite); 
     if(file_exists ( $chemin )){
      if ($fichier != ".." AND $fichier != "." AND !is_dir($fichier))
       {
+         
       unlink($chemin); // On efface.
      }  
     }
 closedir($repertoire); 
-  return $req;     
+$req = $db->prepare('DELETE FROM posts WHERE ART_ID = ?');
+$req2 =  $db->prepare('DELETE FROM comments WHERE COMM_ARTID = ?'); 
+$req->execute(array($id));  
+$req2->execute(array($id));
+    
+ return $req;     
         
     }
-    public function updatePost($chapter,$title,$subtitle,$content,$disable,$id,$description,$keywords)
+    public function updatePost($chapter,$title,$subtitle,$content,$disable,$id,$description,$keywords,$image)
     {
     $date =(new \DateTime())->format('Y-m-d H:i:s');
     $db = $this->dbConnect();
