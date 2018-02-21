@@ -4,6 +4,14 @@ require_once('model/backend/CommentManager.php');
 require_once('model/backend/UsersManager.php');
 require_once('model/backend/BookManager.php');
 
+function changePsswd()
+{
+    
+  updatePsswd($userPsswd)  
+   require('view/backend/listPostsView.php');  
+    
+}
+
 function listOuvrages()
 {
     $bookManager = new OpenClassrooms\DWJP4\Backend\Model\BookManager();
@@ -87,6 +95,9 @@ $_FILES['uploaded_file']['name']= 'chapitre-'.$article['ART_CHAPTER'].$extension
 $path = $path . basename( $_FILES['uploaded_file']['name']);
 echo $path  ;
 if ( in_array($extension_upload,$extensions_valides) ) {
+    if(is_file($path)){
+unlink($path);
+}
     }elseif(move_uploaded_file($_FILES['uploaded_file']['tmp_name'], $path)) {
       $message = "Le fichier ".  basename( $_FILES['uploaded_file']['name']). 
       " à été uploadé";

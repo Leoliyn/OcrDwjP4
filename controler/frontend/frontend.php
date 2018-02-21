@@ -77,7 +77,7 @@ $comment = $commentManager->addComment($_GET['id'],$_POST['author'],$_POST['comm
 post();    
 }
     
- function message($mailExpediteur,$participant){
+ function message($nom,$mailExpediteur,$message){
 $mail = 'webmaster@lionelclaudey.com'; // Adresse de destination.
 if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $mail)) // On filtre les serveurs qui rencontrent des bogues.
 {
@@ -87,19 +87,15 @@ else
 {
 	$passage_ligne = "\n";
 }
-//=====Déclaration des messages au format texte et au format HTML.
-$message_txt = " Message site internet Jean FORTEROCHE  Participation dedicace : ".$participant." adresse mail de contact :".$mailExpediteur;
-$message_html = "<html><head></head><body><b>Message site internet Jean FORTEROCHE</b>, Participation dedicace : ".$participant." adresse mail de contact :".$mailExpediteur."</body></html>";
+//=====Déclaration des messages au format texte 
+$sujet = "Message INternaute pour Jean FORTEROCHE";
+$message_txt = "Message de :".$nom."  Adresse Mail : ".$mailExpediteur.$passage_ligne.$message;
 //==========
  
 //=====Création de la boundary
 $boundary = "-----=".md5(rand());
 //==========
- 
-//=====Définition du sujet.
-$sujet = "Participation dedicace !";
-//=========
- 
+  
 //=====Création du header de l'e-mail.
 $header = "From: \"webmaster@lionelclaudey.com\"<webmaster@lionelclaudey.com>".$passage_ligne;
 $header.= "Reply-to: \"webmaster@lionelclaudey.com\"<webmaster@lionelclaudey.com>".$passage_ligne;
@@ -115,10 +111,7 @@ $message.= "Content-Transfer-Encoding: 8bit".$passage_ligne;
 $message.= $passage_ligne.$message_txt.$passage_ligne;
 //==========
 $message.= $passage_ligne."--".$boundary.$passage_ligne;
-//=====Ajout du message au format HTML
-$message.= "Content-Type: text/html; charset=\"ISO-8859-1\"".$passage_ligne;
-$message.= "Content-Transfer-Encoding: 8bit".$passage_ligne;
-$message.= $passage_ligne.$message_html.$passage_ligne;
+
 //==========
 $message.= $passage_ligne."--".$boundary."--".$passage_ligne;
 $message.= $passage_ligne."--".$boundary."--".$passage_ligne;
@@ -126,7 +119,7 @@ $message.= $passage_ligne."--".$boundary."--".$passage_ligne;
  
 //=====Envoi de l'e-mail.
 mail($mail,$sujet,$message,$header);
-
+listPostsResume();       
 //==========
 }   
     

@@ -16,6 +16,7 @@
     <div class="col-md-8">
       <div class="row">
         <div class="col-sm-6 form-group">
+            <form method='post' action='index.php?action=message'/>
           <input class="form-control" id="nomMessage" name="nomMessage" placeholder="Votre nom" type="text" required>
         </div>
         <div class="col-sm-6 form-group">
@@ -26,7 +27,10 @@
       <br>
       <div class="row">
         <div class="col-md-12 form-group">
-          <button class="btn pull-right" type="submit">Envoyer</button>
+      
+              <input class="btn btn-primary" type="submit" name="send" value="Envoyer" />
+        <input class="btn btn-primary" type="reset" name="reset" value="Reset" />
+        </form>
         </div>
       </div>
     </div>

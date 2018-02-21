@@ -46,6 +46,16 @@ $req->execute(array($id));
         return $req;      
         
     }
+    
+        public function updatePsswd($userPsswd)
+   
+    {
+    $psswd = passwordUser($userPsswd);        
+    $db = $this->dbConnect();
+      $req = $db->prepare('UPDATE users SET  USER_PSSWD=? WHERE USER_NAME= ?');
+    $req->execute(array( $psswd,'admin'));  
+        
+    }
  
     public function updateUser($userName,$userLastname,$userPseudo,$userMail,$userPsswd,$userstatut)
    

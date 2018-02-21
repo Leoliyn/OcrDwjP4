@@ -91,7 +91,10 @@ try {
         {
          book();
         }
-        
+        elseif(isset($_GET['action'])AND ($_GET['action']=='changePsswd'))
+        {
+         changePsswd();
+        }
         
         elseif(isset($_GET['action'])AND ($_GET['action']=='addPost'))
         {

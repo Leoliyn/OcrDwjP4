@@ -15,6 +15,7 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
+                <li><a href='indexadmin.php?action=changePsswd'><i class="fa fa-user   fa-3x "></i></a></li>
                  <li><a href='indexadmin.php?action=listBooks'><i class="fa fa-envira   fa-3x "></i></a></li>
                 <li><a href='index.php'><i class="fa fa-home   fa-3x "></i></a></li>
             

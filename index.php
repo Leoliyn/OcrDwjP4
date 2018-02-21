@@ -14,7 +14,13 @@ if(isset($_GET['action'])AND ($_GET['action']=='post')AND (isset($_GET['id'])))
 }elseif(isset($_GET['action'])AND ($_GET['action']=='enableSignal')AND (isset($_GET['id'])))
         {
             activeSignal();
- }else{       
+ }
+ elseif(isset($_GET['action'])AND ($_GET['action']=='message'))
+        {
+            message($_POST['nomMessage'],$_POST['email'],$_POST['message']);
+ }
+ 
+ else{       
         listPostsResume();        
         }
 
