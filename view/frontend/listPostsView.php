@@ -1,6 +1,10 @@
+
+
 <?php ob_start(); ?>
+<div class="row">
+    
 <div class="col-sm-4">
-         <img src='public/images/couverture2.jpg' title='couverture ouvrage' />
+         <img  src='public/images/couverture2.jpg' title='couverture ouvrage' />
     
 <?php
 while ($dataBook = $books->fetch())
@@ -38,28 +42,18 @@ setlocale(LC_CTYPE, 'fr_FR.UTF-8');
 $titre= iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $data['ART_TITLE']);
 $titre = strtr($titre, " '@ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ","--aAAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy");
 ?>
-  <li><a href="<?=$data['ART_ID']?>.chapitre<?=$data['ART_CHAPTER']?>.<?= $titre ?>.html">chapitre<?=$data['ART_CHAPTER']?>-<?= $data['ART_TITLE'] ?> </a>
+
+       <li><a href="chapitre-<?=$data['ART_CHAPTER']?>-<?= $titre ?>-<?=$data['ART_ID']?>.html">chapitre<?=$data['ART_CHAPTER']?>-<?= $data['ART_TITLE'] ?></a>
 </li>
-<!--    <li><a href="chapitre<?=$data['ART_CHAPTER']?>.<?= $titre ?>.<?=$data['ART_ID']?>.html">chapitre<?=$data['ART_CHAPTER']?>-<?= $data['ART_TITLE'] ?> </a>
-</li>-->
 <?php   
 
-//$contentMenu .= "<li><a href='post";
-//$contentMenu .= $data['ART_ID'];
-//$contentMenu .= "-chapitre";
-//$contentMenu .= $data['ART_CHAPTER'];
-// 
-//$contentMenu .="'>Chap";
-//$contentMenu .=$data['ART_CHAPTER'];
-//$contentMenu .=":";
-//$contentMenu .=$data['ART_TITLE'];
-//$contentMenu .="</a></li>";
 
-$contentMenu .= "<li><a href='chapitre";
+
+$contentMenu .= "<li><a href='";
+
+$contentMenu .= "chapitre-";
 $contentMenu .= $data['ART_CHAPTER'];
-$contentMenu .= ".";
-$contentMenu .= $titre;
-$contentMenu .= "."; 
+$contentMenu .= "-".$titre."-"; 
 $contentMenu .=$data['ART_ID'];
 $contentMenu .=".html'>";
 $contentMenu .=$data['ART_CHAPTER'];
@@ -90,8 +84,8 @@ $contentMenu .="</a></li>";
    
   $carousel .='<img src="uploads/'.$data['ART_IMAGE'].'" alt="illustration chapitre" width="1200" height="700">';
   $carousel .='<div class="carousel-caption">';
-  $carousel .='<a href="chapitre'.$data['ART_CHAPTER'].'.'.$titre.'.'.$data['ART_ID'].'.html"><h3>'.$data['ART_TITLE']." Chapitre ".$data['ART_CHAPTER'].'</h3>';
-  $carousel .='<p>'.$data['ART_SUBTITLE'].'</p></a>';
+  $carousel .='<a class="lienSlider" href="'.$data['ART_ID'].'.chapitre'.$data['ART_CHAPTER'].'.'.$titre.'.html"><h3>'.$data['ART_TITLE']." Chapitre ".$data['ART_CHAPTER'].'';
+  $carousel .='<br />'.$data['ART_SUBTITLE'].'</h3></a>';
   $carousel .='</div></div>';
   
   
@@ -107,59 +101,14 @@ $posts->closeCursor();
     
     
 </div>
+</div>
 
 <?php $content = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
 
   
-    <?php
-    //  $listeCarousel ='<ol class="carousel-indicators">';
-   // $carousel ='<div class="carousel-inner" role="listbox">';
-   // $iteration=0;
- //   $carousel ='<div id="myCarousel" class="carousel slide" data-ride="carousel">';
-   // while ($data = $posts->fetch())
-// 
-     
-//   $listeCarousel .= '<li data-target="#myCarousel" data-slide-to="';
-//   $listeCarousel .= $iteration;
-//   $listeCarousel .= 'class="';
-//  if($iteration==0){
-//    $listeCarousel .= 'active';
-//    }else {
-//   $listeCarousel .= '';
-//   
-//    }
-//   $listeCarousel .= '"></li>';   
-  //$iteration = $iteration +1;
-  // $carousel .= '<div class="carousel-inner" role="listbox">
-    //  <div class="item '; 
-   //////
-  // if($iteration==0){
-  //  $carousel .= 'active';
- //   }else {
-//   $carousel .= '';}
-    /////
-//   $carousel .= '">';
-//  $carousel .='<img src="uploads/';
-//  $carousel .=$data['ART_IMAGE'];
-//  $carousel .= '" alt="';
-//  $carousel .=$data['ART_DESCRIPTION'];
-//  $carousel.= '" width="1200" height="700">';
-//  $carousel .='<div class="carousel-caption">';
-//  $carousel .='<h3>'.$data['ART_TITLE'].$data['ART_CHAPTER'].'</h3>';
-//  $carousel .='<p>'.$data['ART_SUBTITLE'].'</p>';
-//  $carousel .='  </div>  </div>';
-
-   
-   
-   
-  // }
-   // $listeCarousel .= '</ol>'.$iteration; 
-    //$carousel .='</div>';
-      
- ?>   
-
+    
 <?= $listeCarousel ?>
 <?= $carousel ?>
 

@@ -4,13 +4,13 @@ require_once('model/backend/CommentManager.php');
 require_once('model/backend/UsersManager.php');
 require_once('model/backend/BookManager.php');
 
-function changePsswd()
-{
-    
-  updatePsswd($userPsswd)  
-   require('view/backend/listPostsView.php');  
-    
-}
+//function changePsswd()
+//{
+//    
+//  updatePsswd($userPsswd)  
+//   require('view/backend/listPostsView.php');  
+//    
+//}
 
 function listOuvrages()
 {
@@ -77,6 +77,8 @@ function formNewBook()
 
 require('view/backend/newBookView.php');
 }
+
+
 function uploadImage($postId){
    
     $postManager = new OpenClassrooms\DWJP4\Backend\Model\PostManager();
@@ -106,18 +108,19 @@ unlink($path);
   $message= "Une erreur s'est produite durant l'opération Veuillez vérifier le format du fichier( jpg , jpeg , gif , 'png). Veuillez réessayer . Si le problème persiste , contactez votre administrateur ";
     }
   }  else {
- 
+ echo ' cest par la ';
   }
   return $image;
   }
  
 
+
 ////////////Lorsqu'on met à jour un article on le desactive par defaut ////////////////
 
 function majPost()
 {
-    
-    $image= uploadImage($_POST['art_id']);
+    $artId =$_POST['art_id'];
+    $image= uploadImage($artId);
  
  $postManager = new OpenClassrooms\DWJP4\Backend\Model\PostManager();
     /* $article = $postManager->updatePost($_POST['art_chapter'],$_POST['art_title'],$_POST['art_subtitle'],$_POST['art_content'],$_POST['art_desactive'],$_POST['art_id']);
@@ -126,6 +129,30 @@ function majPost()
     $_GET['id'] = $_POST['art_id']; 
    post();
 } 
+function ajouterPost()   
+ {
+  
+   $postManager = new OpenClassrooms\DWJP4\Backend\Model\PostManager();
+   $chapitre= $_POST['art_chapter'];
+   $dernierId = $postManager->addPost($_POST['art_chapter'],$_POST['art_title'],$_POST['art_subtitle'],$_POST['art_content'],$_POST['art_description'],$_POST['art_keywords']);
+   $image= uploadImage($dernierId); 
+      echo "Ceci est le dernier img : ".$image;
+   echo "Ceci est le dernier id : ".$dernierId; 
+    
+ 
+  // $postManager = new OpenClassrooms\DWJP4\Backend\Model\PostManager();
+    /* $article = $postManager->updatePost($_POST['art_chapter'],$_POST['art_title'],$_POST['art_subtitle'],$_POST['art_content'],$_POST['art_desactive'],$_POST['art_id']);
+    $_GET['id'] = $_POST['art_id']; */
+   
+    $article = $postManager->updatePost($_POST['art_chapter'],$_POST['art_title'],$_POST['art_subtitle'],$_POST['art_content'],1,$dernierId,$_POST['art_description'],$_POST['art_keywords'],$image);
+//    $_GET['id'] = $_POST['art_id']; 
+    $_GET['id'] = $dernierId; 
+   post();
+ }
+
+
+
+
 function majBook()
 {
  $bookManager = new OpenClassrooms\DWJP4\Backend\Model\BookManager();
@@ -136,14 +163,9 @@ function majBook()
    book();
 
 } 
- function ajouterPost()   
- {
-   
-   $postManager = new OpenClassrooms\DWJP4\Backend\Model\PostManager();
-     $article = $postManager->addPost($_POST['art_chapter'],$_POST['art_title'],$_POST['art_subtitle'],$_POST['art_content'],$_POST['art_description'],$_POST['art_keywords']);
-    
- listPosts();
- }
+
+
+ 
 function ajouterOuvrage()   
  {
    $bookManager = new OpenClassrooms\DWJP4\Backend\Model\BookManager();

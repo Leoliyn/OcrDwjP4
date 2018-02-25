@@ -44,7 +44,6 @@ public function getPostsResume()
 
         return $post;
     }
-    
     public function addPost($chapter,$title,$subtitle,$content,$description,$keywords)
     {
     
@@ -52,10 +51,22 @@ public function getPostsResume()
     $db = $this->dbConnect();
     $req = $db->prepare('INSERT into posts (ART_CHAPTER,ART_TITLE,ART_SUBTITLE,ART_CONTENT,DATE,ART_DESACTIVE,ART_DESCRIPTION,ART_KEYWORDS) VALUES(?,?,?,?,?,?,?,?)');
     $req->execute(array( $chapter,$title,$subtitle,$content,$date,1,$description,$keywords)); 
-    return $req;     
+    $lastId = $db->lastInsertId();
+    return $lastId;     
      
     }
+    public function addPostImg($image)
+    {
     
+    
+    $db = $this->dbConnect();
+    $req = $db->prepare('INSERT into posts (ART_CHAPTER,ART_TITLE,ART_SUBTITLE,ART_CONTENT,DATE,ART_DESACTIVE,ART_DESCRIPTION,ART_KEYWORDS,ART_IMAGE) VALUES(?,?,?,?,?,?,?,?,?)');
+    $req->execute(array( $chapter,$title,$subtitle,$content,$date,1,$description,$keywords,$image)); 
+    $lastId = $db->lastInsertId();
+    return $lastId;     
+     
+    }
+  
     public function delPost($id)
     {
     $db = $this->dbConnect();
@@ -69,7 +80,8 @@ public function getPostsResume()
     $chemin = $dossier_traite."/".$fichier; // On définit le chemin du fichier à effacer.
     $repertoire = opendir($dossier_traite); 
     if(file_exists ( $chemin )){
-     if ($fichier != ".." AND $fichier != "." AND !is_dir($fichier))
+//     if ($fichier != ".." AND $fichier != "." AND !is_dir($fichier))
+        if(!is_dir($chemin))
       {
          
       unlink($chemin); // On efface.
@@ -84,13 +96,22 @@ $req2->execute(array($id));
  return $req;     
         
     }
+    public function updatePostImage($image,$id){
+     $db = $this->dbConnect();
+    $req = $db->prepare('UPDATE posts SET  ART_IMAGE=? WHERE ART_ID= ?');
+    $req->execute(array($image,$id));     
+        
+    }
+    
+    
     public function updatePost($chapter,$title,$subtitle,$content,$disable,$id,$description,$keywords,$image)
     {
     $date =(new \DateTime())->format('Y-m-d H:i:s');
     $db = $this->dbConnect();
     $req = $db->prepare('UPDATE posts SET  ART_CHAPTER =?,ART_TITLE=?,ART_SUBTITLE=?,ART_CONTENT=?, DATE= ?,ART_DESACTIVE =?,ART_DESCRIPTION= ?,ART_KEYWORDS=?,ART_IMAGE=? WHERE ART_ID= ?');
     $req->execute(array( $chapter,$title,$subtitle,$content,$date,$disable,$description,$keywords,$image,$id));     
-        
+    $lastId = $db->lastInsertId();
+
     }
     public function enablePost($id)
     {

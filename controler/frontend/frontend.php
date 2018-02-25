@@ -77,7 +77,7 @@ $comment = $commentManager->addComment($_GET['id'],$_POST['author'],$_POST['comm
 post();    
 }
     
- function message($nom,$mailExpediteur,$message){
+ function message($nom,$mailExpediteur,$texte){
 $mail = 'webmaster@lionelclaudey.com'; // Adresse de destination.
 if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $mail)) // On filtre les serveurs qui rencontrent des bogues.
 {
@@ -87,9 +87,12 @@ else
 {
 	$passage_ligne = "\n";
 }
+//=====Définition du sujet.
+$sujet = "Message Internaute pour Jean FORTEROCHE";
+
 //=====Déclaration des messages au format texte 
-$sujet = "Message INternaute pour Jean FORTEROCHE";
-$message_txt = "Message de :".$nom."  Adresse Mail : ".$mailExpediteur.$passage_ligne.$message;
+
+$message_txt = "Message de :".$nom."  Adresse Mail : ".$mailExpediteur.$passage_ligne.$texte;
 //==========
  
 //=====Création de la boundary
@@ -112,17 +115,18 @@ $message.= $passage_ligne.$message_txt.$passage_ligne;
 //==========
 $message.= $passage_ligne."--".$boundary.$passage_ligne;
 
-//==========
-$message.= $passage_ligne."--".$boundary."--".$passage_ligne;
-$message.= $passage_ligne."--".$boundary."--".$passage_ligne;
-//==========
+ //=====Envoi de l'e-mail.
+if(mail($mail,$sujet,$message,$header)){
+    $info ="Message envoyé";
  
-//=====Envoi de l'e-mail.
-mail($mail,$sujet,$message,$header);
-listPostsResume();       
-//==========
+}else {
+ $info ="Message non envoyé réessayez plus tard !";   
+  
+}
+return $info;
+
 }   
-    
-    
-    
-    
+ function infoMail($info){   
+ require('view/frontend/modal.php');   
+   
+ }

@@ -16,6 +16,7 @@
     <div class="col-md-8">
       <div class="row">
         <div class="col-sm-6 form-group">
+            
             <form method='post' action='index.php?action=message'/>
           <input class="form-control" id="nomMessage" name="nomMessage" placeholder="Votre nom" type="text" required>
         </div>

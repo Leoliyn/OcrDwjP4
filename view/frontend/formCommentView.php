@@ -1,9 +1,9 @@
 
 
-<?php $title = 'Mon blog'; ?>
+<?php $title = 'Jean FORTEROCHE Billet simple pour l\'ALASKA '; ?>
 
 <?php ob_start(); ?>
-<h1>Mon super blog !</h1>
+<h1>Jean FORTEROCHE Billet simple pour l\'ALASKA</h1>
 
 <h2>Modification du Commentaire</h2>
 <?php 

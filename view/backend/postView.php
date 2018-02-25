@@ -10,7 +10,10 @@
 $data=$article;
 ?>
     <div class='resume'>
+        <img src='./uploads/<?= $data['ART_IMAGE'] ?>' class="miniature" />
+        <br />
       <?php
+        
       if (isset($message)){
           
        echo $message ;

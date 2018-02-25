@@ -2,7 +2,12 @@ body {
       font: 400 15px/1.8 Lato, sans-serif;
       color: #777;
   }
-
+  a {
+      
+      text-decoration:none !important ;
+      
+      
+  }
 tr,td ,table {
     
     border:1px solid #777;
@@ -24,12 +29,36 @@ tr,td ,table {
     
     
 }
-  h3, h4 {
+h2, h1 {
+    
+  background-color : rgba(0,0,0,0.40);  
+    
+}
+
+  h3 {
+      margin: 10px 0 30px 0;
+      letter-spacing: 10px;      
+      font-size: 24px;
+      color: #fff;
+      background-color : rgba(0,0,0,0.40);
+  }
+  
+  h6 {
       margin: 10px 0 30px 0;
       letter-spacing: 10px;      
       font-size: 20px;
-      color: #111;
+      color: #ccc;
+      background-color : rgba(0,0,0,0.40);  
   }
+  
+  h7 {
+            
+      letter-spacing: 10px;      
+      font-size: 12px;
+      color: #fff;
+      background-color : rgba(0,0,0,0.40);  
+  }
+  
   .container {
       padding: 80px 120px;
   }

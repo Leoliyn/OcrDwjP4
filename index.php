@@ -17,10 +17,29 @@ if(isset($_GET['action'])AND ($_GET['action']=='post')AND (isset($_GET['id'])))
  }
  elseif(isset($_GET['action'])AND ($_GET['action']=='message'))
         {
-            message($_POST['nomMessage'],$_POST['email'],$_POST['message']);
- }
+           $infoMail =  message($_POST['nomMessage'],$_POST['email'],$_POST['message']);
+           if($infoMail){
+               ?>
+          <script>
+
+    alert("Message envoyé!");
+
+</script> 
+           <?php 
+            listPostsResume();       
+           }else {
+               
+               ?>
  
- else{       
+      <script>
+
+ alert("Réessayez plus tard!");   
+      </script> <input type="submit" value="?>" />  
+      <?php
+           }
+ }
+ else{  
+   
         listPostsResume();        
         }
 

@@ -32,15 +32,15 @@ while ($data = $posts->fetch())
         <div class='icone-admin'>
             <a href="indexadmin.php?action=post&amp;id=<?= $data['ART_ID'] ?>" title="Accédez aux commentaires"><div class ='nbcomm'><?= $data['NBCOMMENT'] ?></div><i class="fa fa-commenting-o fa-2x"></i></a>
             <a href="indexadmin.php?action=updatePost&amp;id=<?= $data['ART_ID'] ?>" title="Modifiez l'article"><i class="fa  fa-edit  fa-2x "></i></a>
-    <?php
+  
+     <?php
      $desactive=$data['ART_DESACTIVE'];
      if($desactive){
-       echo '<i title="Article en cours de rédaction" class="fa fa-eye-slash  fa-2x "></i>';
+        echo '<a href="indexadmin.php?action=enablePost&amp;id='.$data['ART_ID'].'" title="Cliquez pour publiez l\'article"><i class="fa fa-eye-slash  fa-2x "></i></a>';
      } else {
-      echo '<i title="Article en ligne" class="fa fa-eye  fa-2x "></i>';
+     echo '<a href="indexadmin.php?action=disablePost&amp;id='.$data['ART_ID'].'" title="Mettre l\'article en cours de rédaction"><i class="fa fa-eye  fa-2x "></i></a>';
      }
- ?>
-     
+ ?> 
   
 
             <a href="#" data-toggle="modal" data-target="#deleteModal<?= $data['ART_ID'] ?>" title="Supprimez l'article"><i class="fa fa-remove  fa-2x"></i></a>
