@@ -9,6 +9,7 @@ $bookPreface =$dataBook['OUV_PREFACE'];
 $bookTitre =$dataBook['OUV_TITRE'];
 $bookSoustitre =$dataBook['OUV_SOUSTITRE']; 
 $title= $auteur." ".$bookTitre;
+
 }
 
 while ($data = $posts->fetch())

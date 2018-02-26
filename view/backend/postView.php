@@ -9,7 +9,7 @@
 
 $data=$article;
 ?>
-    <div class='resume'>
+    <div class=''>
         <img src='./uploads/<?= $data['ART_IMAGE'] ?>' class="miniature" />
         <br />
       <?php
@@ -81,7 +81,7 @@ $data=$article;
 while ($comment = $comments->fetch())
 {
 ?>
-<div class='resume'>
+<div class=''>
     <p><strong><?= htmlspecialchars($comment['COMM_PSEUDO']) ?></strong> le <?= $comment['COMM_date_fr'] ?></p>
       <div >  
     <p><?= nl2br(htmlspecialchars($comment['COMM_TITRE'])) ?></p>

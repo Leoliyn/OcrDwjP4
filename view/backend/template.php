@@ -9,7 +9,7 @@
     <?php require_once ('view/backend/navbar.php');?>
 
     
-<div id="article" class="container text-justify">
+<div id="article" class="resume text-justify">
      
    <?= $content ?>
   

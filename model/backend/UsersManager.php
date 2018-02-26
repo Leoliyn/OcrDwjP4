@@ -51,21 +51,19 @@ $req->execute(array($id));
         
     }
     
-        public function updatePsswd($userPsswd)
-   
+    public function updatePsswd($userPsswd)
     {
-    $psswd = passwordUser($userPsswd);        
+    $psswd = $this->passwordUser($userPsswd);        
     $db = $this->dbConnect();
-      $req = $db->prepare('UPDATE users SET  USER_PSSWD=? WHERE USER_NAME= ?');
+    $req = $db->prepare('UPDATE users SET  USER_PASSWD=? WHERE USER_PSEUDO= ?');
     $req->execute(array( $psswd,'admin'));  
-        
+      
     }
  
     public function updateUser($userName,$userLastname,$userPseudo,$userMail,$userPsswd,$userstatut)
-   
     {
     $db = $this->dbConnect();
-      $req = $db->prepare('UPDATE users SET  USER_NAME= ?,USER_LASTNAME=?,USER_PSEUDO=?,USER_MAIL=?,USER_PSSWD=?,USER_STATUT=?, WHERE id= ?');
+      $req = $db->prepare('UPDATE users SET  USER_NAME= ?,USER_LASTNAME=?,USER_PSEUDO=?,USER_MAIL=?,USER_PASSWD=?,USER_STATUT=?, WHERE id= ?');
     $req->execute(array( $userName,$userLastname,$userPseudo,$userMail,$userPsswd,$userstatut));  
         
     }
@@ -73,8 +71,7 @@ $req->execute(array($id));
 // methode connexion compare les identifiant de connexion avec la base users 
     public function connexion($pseudo,$password)
     {
-                $db = $this->dbConnect();
-    
+        $db = $this->dbConnect();
         $nbrow =0;
         $pwd = $this->passwordUser($password);//hash du mot de passe
         $req = $db->prepare('SELECT * FROM users WHERE USER_PSEUDO = ? AND USER_PASSWD = ?');

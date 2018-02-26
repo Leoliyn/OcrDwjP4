@@ -28,8 +28,6 @@ public function getPostsResume()
     DATE_FORMAT(DATE, \'%d/%m/%Y à %Hh%imin%ss\') AS DATE_fr,ART_DESACTIVE,ART_IMAGE, COUNT(comments.COMM_ARTID) AS NBCOMMENT FROM posts 
     LEFT JOIN comments ON posts.ART_ID = comments.COMM_ARTID group by posts.ART_TITLE ORDER BY ART_CHAPTER DESC ');
     
-   
-    
     return $req;
     }
       
@@ -75,7 +73,6 @@ public function getPostsResume()
     //////////Suppression de l'mage associée///////////
     $dossier_traite = "uploads";
     $fichier = $image['ART_IMAGE'];
-    var_dump($image);
     $chemin = $dossier_traite."/".$fichier; // On définit le chemin du fichier à effacer.
     $repertoire = opendir($dossier_traite); 
     if(file_exists ( $chemin )){
@@ -86,16 +83,16 @@ public function getPostsResume()
      }  
     }
 closedir($repertoire); 
-$req = $db->prepare('DELETE FROM posts WHERE ART_ID = ?');
-$req2 =  $db->prepare('DELETE FROM comments WHERE COMM_ARTID = ?'); 
-$req->execute(array($id));  
-$req2->execute(array($id));
+    $req = $db->prepare('DELETE FROM posts WHERE ART_ID = ?');
+    $req2 =  $db->prepare('DELETE FROM comments WHERE COMM_ARTID = ?'); 
+    $req->execute(array($id));  
+    $req2->execute(array($id));
     
  return $req;     
         
     }
     public function updatePostImage($image,$id){
-     $db = $this->dbConnect();
+    $db = $this->dbConnect();
     $req = $db->prepare('UPDATE posts SET  ART_IMAGE=? WHERE ART_ID= ?');
     $req->execute(array($image,$id));     
         

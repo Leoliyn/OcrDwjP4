@@ -8,13 +8,21 @@ require_once('model/backend/CommentManager.php');
 require_once('model/backend/UsersManager.php');
 require_once('model/backend/BookManager.php');
 
-//function changePsswd()
-//{
-//    
-//  updatePsswd($userPsswd)  
-//   require('view/backend/listPostsView.php');  
-//    
-//}
+function changePsswd()
+{
+    if((!empty($_POST['oldmdp']))AND(strlen($_POST['mdp'])>=6)){
+ $userManager =  new OpenClassrooms\DWJP4\Backend\Model\UsersManager(); 
+ $connexion = $userManager->connexion('admin',$_POST['oldmdp']);
+ if($connexion >0){
+ $user =$userManager -> updatePsswd($_POST['mdp']);
+ $message ='Mot de passe enregistré.';   
+ }else{
+ $message ='Identifiant incorrects ou Réessayez plus tard! ';   
+ }
+ 
+    } 
+    require ('view/backend/updatePasswdView.php');  
+}
 //╔════════════════════════════════════════╗  
 //   Liste des ouvrages 
 //╚════════════════════════════════════════╝
