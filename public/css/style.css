@@ -29,10 +29,16 @@ tr,td ,table {
     
     
 }
+.couverture {
+   
+    max-width:95%;
+    
+    
+}
 h2, h1 {
     
   background-color : rgba(0,0,0,0.40);  
-    
+  color:white;  
 }
 
   h3 {
@@ -202,6 +208,7 @@ h2, h1 {
   }
   .dropdown-menu li a {
       color: #000 !important;
+      background-color:white !important;
   }
   .dropdown-menu li a:hover {
       background-color: red !important;

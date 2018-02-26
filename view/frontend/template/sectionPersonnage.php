@@ -1,5 +1,5 @@
 
-<div id="band" class="container text-center">
+<div id="band" class="resume  text-center">
     <a class="up-arrow" href="#myCarousel" data-toggle="tooltip" title="HAUT">
     <span class="glyphicon glyphicon-chevron-up"></span>
   </a>
@@ -22,7 +22,7 @@
     <div class="col-sm-4">
       <p class="text-center"><strong>Galimède</strong></p><br>
       <a href="#window2" data-toggle="collapse">
-      <img src="public/images/galimede.jpg" class="img-circle person" alt="Random Name" width="255" height="255">
+      <img src="public/images/galimede.jpg" class="img-circle person" alt="Galimède" width="255" height="255">
       </a>
       <div id="window2" class="collapse">
         <p>Et iudicare difficile est sane r</p>
@@ -33,7 +33,7 @@
     <div class="col-sm-4">
       <p class="text-center"><strong>jefferson</strong></p><br>
       <a href="#window3" data-toggle="collapse">
-        <img src="public/images/jefferson.jpg" class="img-circle person" alt="Random Name" width="255" height="255">
+        <img src="public/images/jefferson.jpg" class="img-circle person" alt="Jefferson" width="255" height="255">
       </a>
       <div id="window3" class="collapse">
          <p>Et iudicare difficile est sane </p>

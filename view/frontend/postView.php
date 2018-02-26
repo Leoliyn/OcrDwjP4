@@ -44,8 +44,9 @@ $data=$article;
 $title .= $data['ART_TITLE'];
 $description =$data['ART_DESCRIPTION'];
 $keywords = $data['ART_KEYWORDS'];
+$image = 'uploads/'.$data['ART_IMAGE'];
 ?>
-        <div class='resume'>
+        <div class=''>
 
             <h3>
                 <?= htmlspecialchars($data['ART_TITLE']) ?>
@@ -58,7 +59,7 @@ $keywords = $data['ART_KEYWORDS'];
             </p>
 
         </div>
-
+ <div class='text-center'>
         <h2>Votre commentaire</h2>
 
         <form action="commentaire<?= $data['ART_ID'] ?>" method="post">
@@ -80,13 +81,13 @@ $keywords = $data['ART_KEYWORDS'];
     <span class="glyphicon glyphicon-chevron-up"></span>
   </a>
         </div>
-       
+ </div> 
         <?php
 while ($comment = $comments->fetch())
    
 {
 ?>
-            <div class='resume '>
+            <div class=''>
                 <?php
    
  $commentSignale=$comment['SIGNALE'];

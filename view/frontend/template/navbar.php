@@ -8,7 +8,7 @@
       </button>
             <a class="navbar-brand" href="index.php">
                 <?= $auteur ?>
-                <i style ="font-size:12px"><?= $bookTitre ?></i>
+<!--                <i style ="font-size:12px"><?= $bookTitre ?></i>-->
                             </a>
             
         </div>
@@ -17,7 +17,7 @@
                
             <li class="dropdown">
                         <a class="dropdown-toggle  animate slideInUp" data-toggle="dropdown" href="#">LES CHAPITRES
-          <span class="caret"></span></a>
+          <span class=""></span></a>
                         <ul class="dropdown-menu">
         
             <?= $contentMenu ?>

@@ -1,6 +1,6 @@
 
   
-<div id="contact" class="container text-center">
+<div id="contact" class="resume text-center">
      <a class="up-arrow" href="#myCarousel" data-toggle="tooltip" title="HAUT">
     <span class="glyphicon glyphicon-chevron-up"></span>
   </a>

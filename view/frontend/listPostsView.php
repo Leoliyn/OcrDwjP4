@@ -1,11 +1,11 @@
 
 
 <?php ob_start(); ?>
-<div class="row">
+
     
-<div class="col-sm-4">
-         <img  src='public/images/couverture2.jpg' title='couverture ouvrage' />
-    
+<!--    <div class="col-sm-3 col-xs-12">
+         <img  class= 'couverture' src='public/images/couverture2.jpg' title='couverture ouvrage' />
+    -->
 <?php
 while ($dataBook = $books->fetch())
 {
@@ -15,19 +15,24 @@ $bookPreface =$dataBook['OUV_PREFACE'];
 $bookTitre =$dataBook['OUV_TITRE'];
 $bookSoustitre =$dataBook['OUV_SOUSTITRE']; 
 $title= $auteur." ".$bookTitre;
+$keywords=$dataBook['OUV_KEYWORDS'];
+$image ='public/images/couverture2.jpg';
 }
  ?>   
     
+<!--</div>-->
+<div class="  text-center ">
+    <h1>  <?= $bookTitre ?>  </h1>
+     
 </div>
 
-    <div class="col-sm-4">
+   <div class="  text-center ">
     <h3>PREFACE</h3>
-    <?= $bookPreface ?>    
-   
+    
+   <?= $bookPreface ?>
     
 </div>
-  <div class="col-sm-4">
-  
+    <div class="" >
    <ul>
 <?php
 $contentMenu="";
@@ -101,7 +106,7 @@ $posts->closeCursor();
     
     
 </div>
-</div>
+
 
 <?php $content = ob_get_clean(); ?>
 
