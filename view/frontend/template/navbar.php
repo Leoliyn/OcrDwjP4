@@ -17,7 +17,7 @@
                
             <li class="dropdown">
                         <a class="dropdown-toggle  animate slideInUp" data-toggle="dropdown" href="#">LES CHAPITRES
-          <span class=""></span></a>
+          <span class="caret"></span></a>
                         <ul class="dropdown-menu">
         
             <?= $contentMenu ?>

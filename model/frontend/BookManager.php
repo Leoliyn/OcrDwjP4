@@ -1,5 +1,9 @@
 <?php
-
+//╔═════════════════════════════╗  
+//           PROJET 4 DWJ OPENCLASSROOMS         
+//           CLAUDEY Lionel Février 2018           
+//╚═════════════════════════════╝
+//GESTION DES OUVRAGES  LISTES
 namespace OpenClassrooms\DWJP4\frontend\Model;
 
 require_once("model/frontend/Manager.php");

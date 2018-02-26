@@ -1,8 +1,15 @@
 <?php
-
+//╔═════════════════════════════╗  
+//           PROJET 4 DWJ OPENCLASSROOMS         
+//           CLAUDEY Lionel Février 2018           
+//╚═════════════════════════════╝
+//GESTION DES OUVRAGES  LISTE - AJOUTER- MODIFIER- SUPPRIMER -SUPPRIMER -ACTIVER- DESACTIVER
 namespace OpenClassrooms\DWJP4\backend\Model;
 
 require_once("model/backend/Manager.php");
+
+
+
 
 class BookManager extends Manager
 {
@@ -16,7 +23,7 @@ class BookManager extends Manager
         return $req;
     }
 
-//       
+     
     
     public function getBook($bookId)
     {

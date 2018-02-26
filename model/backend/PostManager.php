@@ -1,5 +1,9 @@
 <?php
-
+//╔═════════════════════════════╗  
+//           PROJET 4 DWJ OPENCLASSROOMS         
+//           CLAUDEY Lionel Février 2018           
+//╚═════════════════════════════╝
+//GESTION DES CHAPITRES  LISTE - AJOUTER- MODIFIER- SUPPRIMER -SUPPRIMER -ACTIVER- DESACTIVER
 namespace OpenClassrooms\DWJP4\Backend\Model;
 
 require_once("model/backend/Manager.php");
@@ -19,12 +23,7 @@ class PostManager extends Manager
 public function getPostsResume()
     {
         $db = $this->dbConnect();
-        /*$req = $db->query('SELECT ART_ID, ART_CHAPTER,ART_TITLE,ART_SUBTITLE,ART_CONTENT, DATE_FORMAT(DATE, \'%d/%m/%Y à %Hh%imin%ss\') AS DATE_fr,ART_DESACTIVE,
-        COUNT(comments.COMM_ARTID)AS NBCOMM FROM posts LEFT JOIN comments ON posts.ART_ID=comments.COMM_ARTID ORDER BY ART_CHAPTER DESC ');*/
-/*SELECT ART_TITLE,count(comments.COMM_ARTID)AS `nbcomm` FROM `posts` left JOIN `comments` ON posts.ART_ID=comments.COMM_ARTID
-  $req = $db->query('SELECT ART_ID, ART_CHAPTER,ART_TITLE,ART_SUBTITLE,ART_CONTENT, DATE_FORMAT(DATE, \'%d/%m/%Y à %Hh%imin%ss\') AS DATE_fr,ART_DESACTIVE,
-  COUNT(comments.COMM_ARTID) AS NBCOMMENT FROM posts LEFT JOIN comments ON posts.ART_ID = comments.COMM_ARTID group by posts.ART_TITLE ORDER BY ART_CHAPTER DESC ');
-     */   
+  
     $req = $db->query('SELECT ART_ID, LEFT(`ART_CONTENT`,300) AS ART_CONTENT,ART_CHAPTER,ART_TITLE,ART_SUBTITLE,
     DATE_FORMAT(DATE, \'%d/%m/%Y à %Hh%imin%ss\') AS DATE_fr,ART_DESACTIVE,ART_IMAGE, COUNT(comments.COMM_ARTID) AS NBCOMMENT FROM posts 
     LEFT JOIN comments ON posts.ART_ID = comments.COMM_ARTID group by posts.ART_TITLE ORDER BY ART_CHAPTER DESC ');
@@ -33,7 +32,7 @@ public function getPostsResume()
     
     return $req;
     }
-//       
+      
     
     public function getPost($postId)
     {
@@ -80,7 +79,6 @@ public function getPostsResume()
     $chemin = $dossier_traite."/".$fichier; // On définit le chemin du fichier à effacer.
     $repertoire = opendir($dossier_traite); 
     if(file_exists ( $chemin )){
-//     if ($fichier != ".." AND $fichier != "." AND !is_dir($fichier))
         if(!is_dir($chemin))
       {
          

@@ -1,8 +1,13 @@
 <?php
 session_start();
 ini_set('display_errors', 1);
+//╔═════════════════════════════╗  
+//║           PROJET 4 DWJ OPENCLASSROOMS         ║
+//║         CLAUDEY Lionel Février 2018           ║
+//╚═════════════════════════════╝
+
 require_once  'controler/frontend/frontend.php'; 
-if(isset($_GET['action'])AND ($_GET['action']=='post')AND (isset($_GET['id'])))
+if(isset($_GET['action'])AND ($_GET['action']=='post')AND (isset($_GET['id']))) 
         {
       post();
 }elseif(isset($_GET['action'])AND ($_GET['action']=='addComment') AND (isset($_GET['id']))){
@@ -20,29 +25,24 @@ if(isset($_GET['action'])AND ($_GET['action']=='post')AND (isset($_GET['id'])))
            $infoMail =  message($_POST['nomMessage'],$_POST['email'],$_POST['message']);
            if($infoMail){
                ?>
-          <script>
+    <script>
+        alert("Message envoyé!");
 
-    alert("Message envoyé!");
-
-</script> 
-           <?php 
+    </script>
+    <?php 
             listPostsResume();       
            }else {
                
                ?>
- 
-      <script>
 
- alert("Réessayez plus tard!");   
-      </script> <input type="submit" value="?>" />  
-      <?php
+    <script>
+        alert("Réessayez plus tard!");
+
+    </script> <input type="submit" value="?>" />
+    <?php
            }
  }
  else{  
    
         listPostsResume();        
         }
-
-
-
-

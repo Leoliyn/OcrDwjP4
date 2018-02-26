@@ -1,6 +1,11 @@
 <?php
 session_start();
 ini_set('display_errors', 1);
+
+//╔═════════════════════════════╗  
+//║           PROJET 4 DWJ OPENCLASSROOMS         ║
+//║         CLAUDEY Lionel février 2018           ║
+//╚═════════════════════════════╝
 require_once('controler/backend/backend.php'); 
 
 

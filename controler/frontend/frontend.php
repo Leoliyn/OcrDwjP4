@@ -1,9 +1,12 @@
 <?php
-
+//╔═════════════════════════════╗  
+//           PROJET 4 DWJ OPENCLASSROOMS         
+//           CLAUDEY Lionel Février 2018           
+//╚═════════════════════════════╝
 require_once('model/frontend/PostManager.php');
 require_once('model/frontend/CommentManager.php');
 require_once('model/frontend/BookManager.php');
-// rewrite des url au format (indiqué dans htaccess)
+// rewrite des url au format (indiqué dans htaccess) Non utilisée !
 function urlRewrite($url){
 /*$url = "index.php?action=post&id=20&titre=azerty&chapitre=5";*/
 $tab_url = explode("?", $url);
@@ -18,8 +21,11 @@ return $url2;
 }
 
 
-
-// List des chapitres depuis getPosts (uniquement publiés)
+//╔════════════════════════════════════════╗  
+//        List des chapitres depuis getPosts (uniquement publiés) 
+//        - listPostsView
+//╚════════════════════════════════════════╝
+// 
 function listPosts()
 {
     $postManager = new OpenClassrooms\DWJP4\frontend\Model\PostManager();
@@ -28,7 +34,11 @@ function listPosts()
     require('view/frontend/listPostsView.php');
 }
 
-
+//╔════════════════════════════════════════════╗  
+//      Liste de tous les chapitres depuis getPostsResume avec XX  
+//      premiers caractères - Données de l'Ouvrage - listPostsView                                        
+//╚════════════════════════════════════════════╝
+// 
 function listPostsResume()
 {
     $postManager = new OpenClassrooms\DWJP4\frontend\Model\PostManager();
@@ -37,7 +47,10 @@ function listPostsResume()
     $books = $bookManager->getBooks();
    require('view/frontend/listPostsView.php');
 }
-
+//╔════════════════════════════════════════╗  
+//   Un chapitre  . Données Ouvrage - Les commentaires- req postView
+//╚════════════════════════════════════════╝
+// 
 function post()
 {
     $postManager = new OpenClassrooms\DWJP4\frontend\Model\PostManager();
@@ -51,7 +64,10 @@ function post()
     require('view/frontend/postView.php');
 }
 
-
+//╔════════════════════════════════════════╗  
+// active( le rend visible) le commentaire  - lance la fonction post()
+//╚════════════════════════════════════════╝
+// 
     
 function activeSignal()
 {
@@ -59,8 +75,11 @@ function activeSignal()
 $comment = $commentManager->enableSignal($_GET['commId']);  
  post();
     
-    
 }
+//╔════════════════════════════════════════╗  
+//   désactive  le commentaire(invisible)  - lance la fonction post()
+//╚════════════════════════════════════════╝
+// 
 function desactiveSignal()
 {
   
@@ -68,7 +87,10 @@ $commentManager = new OpenClassrooms\DWJP4\frontend\Model\commentManager();
 $comment = $commentManager->disableSignal($_GET['commId']);  
  post();
 }   
-
+//╔════════════════════════════════════════╗  
+//   Ajoute un commentaire au chapitre puis lance la fonction post()
+//╚════════════════════════════════════════╝
+// 
 function ajoutComment()
 {
     
@@ -76,7 +98,11 @@ $commentManager = new OpenClassrooms\DWJP4\frontend\Model\commentManager();
 $comment = $commentManager->addComment($_GET['id'],$_POST['author'],$_POST['comment']);
 post();    
 }
-    
+//╔════════════════════════════════════════╗  
+//   Fonction préparation puis envoi du courriel de contact
+//     - lance le script modal.php
+//╚════════════════════════════════════════╝
+//    
  function message($nom,$mailExpediteur,$texte){
 $mail = 'webmaster@lionelclaudey.com'; // Adresse de destination.
 if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $mail)) // On filtre les serveurs qui rencontrent des bogues.

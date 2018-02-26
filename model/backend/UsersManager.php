@@ -1,5 +1,9 @@
 <?php
-
+//╔═════════════════════════════╗  
+//           PROJET 4 DWJ OPENCLASSROOMS         
+//           CLAUDEY Lionel Février 2018           
+//╚═════════════════════════════╝
+//GESTION DES UTILISATEURS  LISTE - AJOUTER- MODIFIER- SUPPRIMER - CHANGER PSSQWD -CONNEXION VERIF 
 namespace OpenClassrooms\DWJP4\Backend\Model;
 
 require_once("model/backend/Manager.php");
