@@ -15,11 +15,11 @@
 
 // EN RAISON DUN PB DE NB CONNEXION ONLINE
 $auteur = "Jean FORTEROCHE";
-$description ="grement au Dr. En modifiant lgrement ses documents.David avait d sasseoir lorsquil avait entendu le prnom Florence. ";
+$description ="En modifiant lgrement ses documents.David avait d sasseoir lorsquil avait entendu le prnom Florence. ";
 $bookPreface ="<p>Un long silence se fit dans la voiture. Le chauffeur regardait droit devant. David jeta un &oelig;il sur le compteur qui affichait 210km/h. L&rsquo;autoroute &eacute;tait d&eacute;serte. Depuis la construction de la Ligne Grande Vitesse, les gens pr&eacute;f&eacute;raient prendre les transports en communs, plus rapides et moins chers. La LGV traversait la France d'un bout &agrave; l'autre avec un arr&ecirc;t &agrave; Paris. C&rsquo;est lui aussi qui &eacute;tait &agrave; la base du dernier processeur, le sph&eacute;ro. Un processeur ayant une architecture en forme de sph&egrave;re et capable de traiter les informations &agrave; une vitesse jamais atteinte. Tous les ordinateurs en &eacute;taient &eacute;quip&eacute;s. Le cr&eacute;ateur officiel, le Dr.</p>";
 $bookTitre ="Billet simple pour l'ALASKA";
 $bookSoustitre ="Inuits inouïs"; 
-$title= $auteur." ".$bookTitre;
+//$title= $auteur." ".$bookTitre;
 $keywords="écrivain, livre, Alaska, chiens, Jefferson, Galimède,Joe CASH";
 $image ='public/images/couverture2.jpg';
 
@@ -53,7 +53,7 @@ $posts->closeCursor();
     <?php
 
 $data=$article;
-$title .= htmlspecialchars($data['ART_TITLE']);
+$title= "Chapitre ".htmlspecialchars($data['ART_CHAPTER']).','.htmlspecialchars($data['ART_TITLE'])."- Blog de Jean FORTEROCHE";
 $description =htmlspecialchars($data['ART_DESCRIPTION']);
 $keywords = htmlspecialchars($data['ART_KEYWORDS']);
 $image = 'uploads/'.htmlspecialchars($data['ART_IMAGE']);
@@ -67,7 +67,7 @@ $image = 'uploads/'.htmlspecialchars($data['ART_IMAGE']);
 
             <p><em>le <?= htmlspecialchars($data['DATE_fr']) ?></em></p>
             <p>
-                <?= htmlspecialchars($data['ART_CONTENT']) ?>
+                <?= $data['ART_CONTENT'] ?>
             </p>
 
         </div>
