@@ -22,9 +22,13 @@ tr,td ,table {
     
     
 }
+.imgCarousel {
+   
+   width:auto;
+}
 .miniature {
-    height:137px;
-    width:400px;
+    height:auto;
+    width:40%;
     
     
     
@@ -72,7 +76,7 @@ h2, h1 {
       border: 10px solid transparent;
       margin-bottom: 25px;
       width: 80%;
-      height: 80%;
+      height: auto;
       opacity: 1;
   }
   .person:hover {

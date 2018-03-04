@@ -1,5 +1,4 @@
 
-
 <?php $title = 'Jean FORTEROCHE'; ?>
 
 <?php ob_start(); ?>
@@ -12,14 +11,14 @@ while ($data = $posts->fetch())
 ?>
 
     <div class='resume'>
-        <img src='./uploads/<?= $data['ART_IMAGE'] ?>' class="miniature" />
+        <img src='./uploads/<?= htmlspecialchars($data['ART_IMAGE']) ?>' class="miniature" />
         <h3>
-            <p>Chapitre:  <?= $data['ART_CHAPTER'] ?></p>
-            <?= $data['ART_TITLE'] ?>
+            <p>Chapitre:  <?= htmlspecialchars($data['ART_CHAPTER']) ?></p>
+            <?= htmlspecialchars($data['ART_TITLE']) ?>
             
         </h3>
        
-        <p><em>le <?= $data['DATE_fr'] ?></em></p>
+        <p><em>le <?= htmlspecialchars($data['DATE_fr'])?></em></p>
    <div class='contenu'>
             <?php 
     $contenu=$data['ART_CONTENT'];
@@ -30,24 +29,24 @@ while ($data = $posts->fetch())
             <br />
         </div>
         <div class='icone-admin'>
-            <a href="indexadmin.php?action=post&amp;id=<?= $data['ART_ID'] ?>" title="Accédez aux commentaires"><div class ='nbcomm'><?= $data['NBCOMMENT'] ?></div><i class="fa fa-commenting-o fa-2x"></i></a>
+            <a href="indexadmin.php?action=post&amp;id=<?= htmlspecialchars($data['ART_ID']) ?>" title="Accédez aux commentaires"><div class ='nbcomm'><?= htmlspecialchars($data['NBCOMMENT']) ?></div><i class="fa fa-commenting-o fa-2x"></i></a>
             <a href="indexadmin.php?action=updatePost&amp;id=<?= $data['ART_ID'] ?>" title="Modifiez l'article"><i class="fa  fa-edit  fa-2x "></i></a>
   
      <?php
-     $desactive=$data['ART_DESACTIVE'];
+     $desactive=htmlspecialchars($data['ART_DESACTIVE']);
      if($desactive){
-        echo '<a href="indexadmin.php?action=enablePost&amp;id='.$data['ART_ID'].'" title="Cliquez pour publiez l\'article"><i class="fa fa-eye-slash  fa-2x "></i></a>';
+        echo '<a href="indexadmin.php?action=enablePost&amp;id='.htmlspecialchars($data['ART_ID']).'" title="Cliquez pour publiez l\'article"><i class="fa fa-eye-slash  fa-2x "></i></a>';
      } else {
-     echo '<a href="indexadmin.php?action=disablePost&amp;id='.$data['ART_ID'].'" title="Mettre l\'article en cours de rédaction"><i class="fa fa-eye  fa-2x "></i></a>';
+     echo '<a href="indexadmin.php?action=disablePost&amp;id='.htmlspecialchars($data['ART_ID']).'" title="Mettre l\'article en cours de rédaction"><i class="fa fa-eye  fa-2x "></i></a>';
      }
  ?> 
   
 
-            <a href="#" data-toggle="modal" data-target="#deleteModal<?= $data['ART_ID'] ?>" title="Supprimez l'article"><i class="fa fa-remove  fa-2x"></i></a>
+            <a href="#" data-toggle="modal" data-target="#deleteModal<?= htmlspecialchars($data['ART_ID']) ?>" title="Supprimez l'article"><i class="fa fa-remove  fa-2x"></i></a>
           </div> 
     </div>
 <!-- Modal -->
-  <div class="modal fade" id="deleteModal<?= $data['ART_ID'] ?>" role="dialog">
+  <div class="modal fade" id="deleteModal<?= htmlspecialchars($data['ART_ID']) ?>" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -59,7 +58,7 @@ while ($data = $posts->fetch())
         <div class="modal-body">
           <form role="form" action="indexadmin.php" method="get">
           <input type="hidden" class="form-control" id="action" name="action"value="delPost">
-           <input type="hidden" class="form-control" id="id" name="id"value="<?= $data['ART_ID'] ?>">   
+           <input type="hidden" class="form-control" id="id" name="id"value="<?= htmlspecialchars($data['ART_ID']) ?>">   
               <button type="submit" class="btn btn-block">Supprimer
                 <span class="glyphicon glyphicon-ok"></span>
               </button>

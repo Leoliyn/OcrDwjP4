@@ -19,7 +19,7 @@ if (isset($message)){
 
     <form action='indexadmin.php?action=changePsswd' method="post">
            
-        <p><label></label></p><p><input type="hidden" id="ouv_id" name="ouv_id" value="<?= $data['OUV_ID'] ?>"  ></p>
+        <p><label></label></p><p><input type="hidden" id="ouv_id" name="ouv_id" value="<?=  htmlspecialchars($data['OUV_ID']) ?>"  ></p>
             <label>Mot de passe actuel</label><input type="password" class="form-control" id="oldmdp" name = "oldmdp">
             <label> Nouveau Mot de passe </label><input type="password" class="form-control" id="mdp" name = "mdp">
         

@@ -144,6 +144,14 @@ function uploadImage($postId){
 $extension_upload = strtolower(  strrchr($_FILES['uploaded_file']['name'], '.')  );
 $path = "uploads/";
 $_FILES['uploaded_file']['name']= 'chapitre-'.$article['ART_CHAPTER'].$extension_upload ;
+/////
+// On récupère les dimensions de l'image
+$dimensions = getimagesize($_FILES['uploaded_file']['tmp_name']);
+$width_orig = $dimensions[0];
+$height_orig = $dimensions[1];
+$ratio_orig = $width_orig /$height_orig;
+
+
 $path = $path . basename( $_FILES['uploaded_file']['name']);
 echo $path  ;
 if ( in_array($extension_upload,$extensions_valides) ) {
@@ -154,6 +162,16 @@ unlink($path);
       $message = "Le fichier ".  basename( $_FILES['uploaded_file']['name']). 
       " à été uploadé";
      $image = $_FILES['uploaded_file']['name'];
+     // On redimensionne le fichier puis on l'enregistre
+     // Définition de la largeur et de la hauteur maximale
+        $width = 1600;
+        $height = 550;
+        $ratio  = $width/$height;
+        $image_dst = imagecreatetruecolor($width, $height);
+        $image_src = imagecreatefromjpeg($path);
+        imagecopyresampled($image_dst, $image_src, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
+        imagejpeg($image_dst, $path, 100); 
+     ////////////////////////////////
     } else{
   $message= "Une erreur s'est produite durant l'opération Veuillez vérifier le format du fichier( jpg , jpeg , gif , 'png). Veuillez réessayer . Si le problème persiste , contactez votre administrateur ";
     }
@@ -168,30 +186,44 @@ unlink($path);
 //╚══════════════════════════════════════════╝
 ///Lorsqu'on met à jour un article on le desactive par defaut ////////////////
 
-function majPost()
+  
+  function majPost()
 {
-    $artId =$_POST['art_id'];
-    $image= uploadImage($artId);
+    $regex="([^a-zA-Z0-9 .,\'@ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ]+)";
+    $id =preg_replace('([^0-9]+)','',$_POST['art_id']);
+   $keywords =preg_replace($regex,'',$_POST['art_keywords']);
+    $description =preg_replace($regex,'',$_POST['art_description']);
+    $chapter =preg_replace($regex,'',$_POST['art_chapter']);
+    $subtitle =preg_replace($regex,'',$_POST['art_subtitle']);
+    $titre =preg_replace($regex,'',$_POST['art_title']);
+    $image= uploadImage($id);
  
  $postManager = new OpenClassrooms\DWJP4\Backend\Model\PostManager();
 
-    $article = $postManager->updatePost($_POST['art_chapter'],$_POST['art_title'],$_POST['art_subtitle'],$_POST['art_content'],1,$_POST['art_id'],$_POST['art_description'],$_POST['art_keywords'],$image);
-    $_GET['id'] = $_POST['art_id']; 
+    $article = $postManager->updatePost($chapter,$titre,$subtitle,$_POST['art_content'],1,$id,$description,$keywords,$image);
+    $_GET['id'] = $id; 
    post();
 } 
 function ajouterPost()   
  {
-  
-   $postManager = new OpenClassrooms\DWJP4\Backend\Model\PostManager();
-   $chapitre= $_POST['art_chapter'];
-   $dernierId = $postManager->addPost($_POST['art_chapter'],$_POST['art_title'],$_POST['art_subtitle'],$_POST['art_content'],$_POST['art_description'],$_POST['art_keywords']);
-   $image= uploadImage($dernierId); 
-      echo "Ceci est le dernier img : ".$image;
-   echo "Ceci est le dernier id : ".$dernierId; 
+    $regex="([^a-zA-Z0-9 .,\'@ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ]+)";
+    $keywords =preg_replace($regex,'',$_POST['art_keywords']);
+    $description =preg_replace($regex,'',$_POST['art_description']);
+    $chapter =preg_replace($regex,'',$_POST['art_chapter']);
+    $subtitle =preg_replace($regex,'',$_POST['art_subtitle']);
+    $titre =preg_replace($regex,'',$_POST['art_title']);
+    
+   
+    
+    $postManager = new OpenClassrooms\DWJP4\Backend\Model\PostManager();
+    $dernierId = $postManager->addPost($chapter,$titre,$subtitle,$_POST['art_content'],$description,$keywords);
+    $image= uploadImage($dernierId); 
+    echo "Ceci est le dernier img : ".$image;
+    echo "Ceci est le dernier id : ".$dernierId; 
  
-    $article = $postManager->updatePost($_POST['art_chapter'],$_POST['art_title'],$_POST['art_subtitle'],$_POST['art_content'],1,$dernierId,$_POST['art_description'],$_POST['art_keywords'],$image);
+    $article = $postManager->updatePost($chapter,$titre,$subtitle,$_POST['art_content'],1,$dernierId,$description,$keywords,$image);
     $_GET['id'] = $dernierId; 
-   post();
+    post();
  }
 
 //╔══════════════════════════════════════════╗  
@@ -200,9 +232,21 @@ function ajouterPost()
 //
 function majBook()
 {
+    $regex="([^a-zA-Z0-9 .,\'@ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ]+)";
+    
+    $id =preg_replace('([^0-9]+)','',$_POST['ouv_id']);
+    $keywords =preg_replace($regex,'',$_POST['ouv_keywords']);
+    $description =preg_replace($regex,'',$_POST['ouv_description']);
+    $subtitle =preg_replace($regex,'',$_POST['ouv_soustitre']);
+    $titre =preg_replace($regex,'',$_POST['ouv_titre']);
+    $auteur =preg_replace($regex,'',$_POST['ouv_auteur']);
+    
+    
+    
+    
     $bookManager = new OpenClassrooms\DWJP4\Backend\Model\BookManager();
-     $book = $bookManager->updateBook($_POST['ouv_titre'],$_POST['ouv_preface'],$_POST['ouv_soustitre'],$_POST['ouv_auteur'],$_POST['ouv_description'],$_POST['ouv_keywords'],0,$_POST['ouv_id']);
-    $_GET['id'] = $_POST['ouv_id']; 
+     $book = $bookManager->updateBook($titre,$_POST['ouv_preface'],$subtitle,$auteur,$description,$keywords,0,$id);
+    $_GET['id'] = $id; 
    book();
 
 } 
@@ -214,8 +258,19 @@ function majBook()
  
 function ajouterOuvrage()   
  {
-   $bookManager = new OpenClassrooms\DWJP4\Backend\Model\BookManager();
-   $book = $bookManager->addBook($_POST['ouv_titre'],$_POST['ouv_preface'],$_POST['ouv_soustitre'],$_POST['ouv_auteur'],$_POST['ouv_description'],$_POST['ouv_keywords']);
+   
+    $regex="([^a-zA-Z0-9 .,\'@ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ]+)";
+    
+   
+    $keywords =preg_replace($regex,'',$_POST['ouv_keywords']);
+    $description =preg_replace($regex,'',$_POST['ouv_description']);
+    $subtitle =preg_replace($regex,'',$_POST['ouv_soustitre']);
+    $titre =preg_replace($regex,'',$_POST['ouv_titre']);
+    $auteur =preg_replace($regex,'',$_POST['ouv_auteur']);
+    
+    
+    $bookManager = new OpenClassrooms\DWJP4\Backend\Model\BookManager();
+   $book = $bookManager->addBook($titre,$_POST['ouv_preface'],$subtitle,$auteur,$description,$keywords);
    listOuvrages();
  }
  

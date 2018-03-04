@@ -1,28 +1,39 @@
 <?php $title = 'Jean FORTEROCHE Billet simple pour l\'ALASKA '; ?>
 <?php ob_start();?>
 <?php 
-while ($dataBook = $books->fetch())
-{
-$auteur = $dataBook['OUV_AUTEUR'];
-$description =$dataBook['OUV_DESCRIPTION'];
-$bookPreface =$dataBook['OUV_PREFACE'];
-$bookTitre =$dataBook['OUV_TITRE'];
-$bookSoustitre =$dataBook['OUV_SOUSTITRE']; 
-$title= $auteur." ".$bookTitre;
+//while ($dataBook = $books->fetch())
+//{
+//$auteur = htmlspecialchars($dataBook['OUV_AUTEUR']);
+//$description =htmlspecialchars($dataBook['OUV_DESCRIPTION']);
+//$bookPreface =htmlspecialchars($dataBook['OUV_PREFACE']);
+//$bookTitre =htmlspecialchars($dataBook['OUV_TITRE']);
+//$bookSoustitre =htmlspecialchars($dataBook['OUV_SOUSTITRE']); 
+//$title= $auteur." ".$bookTitre;
+//
+//}
+//$books->closeCursor();
 
-}
+// EN RAISON DUN PB DE NB CONNEXION ONLINE
+$auteur = "Jean FORTEROCHE";
+$description ="grement au Dr. En modifiant lgrement ses documents.David avait d sasseoir lorsquil avait entendu le prnom Florence. ";
+$bookPreface ="<p>Un long silence se fit dans la voiture. Le chauffeur regardait droit devant. David jeta un &oelig;il sur le compteur qui affichait 210km/h. L&rsquo;autoroute &eacute;tait d&eacute;serte. Depuis la construction de la Ligne Grande Vitesse, les gens pr&eacute;f&eacute;raient prendre les transports en communs, plus rapides et moins chers. La LGV traversait la France d'un bout &agrave; l'autre avec un arr&ecirc;t &agrave; Paris. C&rsquo;est lui aussi qui &eacute;tait &agrave; la base du dernier processeur, le sph&eacute;ro. Un processeur ayant une architecture en forme de sph&egrave;re et capable de traiter les informations &agrave; une vitesse jamais atteinte. Tous les ordinateurs en &eacute;taient &eacute;quip&eacute;s. Le cr&eacute;ateur officiel, le Dr.</p>";
+$bookTitre ="Billet simple pour l'ALASKA";
+$bookSoustitre ="Inuits inouïs"; 
+$title= $auteur." ".$bookTitre;
+$keywords="écrivain, livre, Alaska, chiens, Jefferson, Galimède,Joe CASH";
+$image ='public/images/couverture2.jpg';
 
 while ($data = $posts->fetch())
 {
 
 setlocale(LC_CTYPE, 'fr_FR.UTF-8');
-$titre0= iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $data['ART_TITLE']);
+$titre0= iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', htmlspecialchars($data['ART_TITLE']));
 $titre = strtr($titre0, " '@ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ","--aAAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy");
 ?>
 
 <!--  <li><a href="<?=$data['ART_ID']?>.chapitre<?=$data['ART_CHAPTER']?>.<?= $titre ?>.html">chapitre<?=$data['ART_CHAPTER']?>-<?= $data['ART_TITLE'] ?> </a>
 </li>-->
-<li><a href="chapitre-<?=$data['ART_CHAPTER']?>-<?= $titre ?>-<?=$data['ART_ID']?>.html">chapitre<?=$data['ART_CHAPTER']?>-<?= $data['ART_TITLE'] ?> </a>
+<li><a href="chapitre-<?=htmlspecialchars($data['ART_CHAPTER'])?>-<?= htmlspecialchars($titre) ?>-<?=htmlspecialchars($data['ART_ID'])?>.html">chapitre<?=htmlspecialchars($data['ART_CHAPTER'])?>-<?= htmlspecialchars($data['ART_TITLE'])?> </a>
 </li>
     <?php
 
@@ -42,10 +53,10 @@ $posts->closeCursor();
     <?php
 
 $data=$article;
-$title .= $data['ART_TITLE'];
-$description =$data['ART_DESCRIPTION'];
-$keywords = $data['ART_KEYWORDS'];
-$image = 'uploads/'.$data['ART_IMAGE'];
+$title .= htmlspecialchars($data['ART_TITLE']);
+$description =htmlspecialchars($data['ART_DESCRIPTION']);
+$keywords = htmlspecialchars($data['ART_KEYWORDS']);
+$image = 'uploads/'.htmlspecialchars($data['ART_IMAGE']);
 ?>
         <div class=''>
 
@@ -54,18 +65,18 @@ $image = 'uploads/'.$data['ART_IMAGE'];
 
             </h3>
 
-            <p><em>le <?= $data['DATE_fr'] ?></em></p>
+            <p><em>le <?= htmlspecialchars($data['DATE_fr']) ?></em></p>
             <p>
-                <?= ($data['ART_CONTENT']) ?>
+                <?= htmlspecialchars($data['ART_CONTENT']) ?>
             </p>
 
         </div>
  <div class='text-center'>
         <h2>Votre commentaire</h2>
 
-        <form action="commentaire<?= $data['ART_ID'] ?>" method="post">
+        <form action="commentaire<?= htmlspecialchars($data['ART_ID']) ?>" method="post">
             <div>
-                <input type="hidden" id="postId" name="postId" value="<?= $data['ART_ID'] ?>" />
+                <input type="hidden" id="postId" name="postId" value="<?= htmlspecialchars($data['ART_ID']) ?>" />
                 <label for="author">Auteur</label><br />
                 <input type="text" id="author" name="author" />
             </div>
@@ -95,12 +106,12 @@ while ($comment = $comments->fetch())
      if($commentSignale){ 
     echo '<i class="fa fa-thumbs-down  fa-2x red"></i>';
     }else{
-          echo '<a href="signalement'.$comment['COMM_ID']."-".$data['ART_ID'].'" title="Cliquez pour signaler le commentaire"><i class="fa fa-thumbs-o-up  fa-2x vert"></i></a>';   
+          echo '<a href="signalement'.htmlspecialchars($comment['COMM_ID'])."-".htmlspecialchars($data['ART_ID']).'" title="Cliquez pour signaler le commentaire"><i class="fa fa-thumbs-o-up  fa-2x vert"></i></a>';   
          
      }
  ?>
                     <p><strong><?= htmlspecialchars($comment['COMM_PSEUDO']) ?> </strong>a écrit le
-                        <?= $comment['COMM_date_fr'] ?>
+                        <?= htmlspecialchars($comment['COMM_date_fr']) ?>
                     </p>
                     <div>
                         <p>
@@ -116,6 +127,7 @@ while ($comment = $comments->fetch())
 
             <?php
 }
+$comments->closeCursor();
 ?>
             <?php $content = ob_get_clean(); ?>
             <?php ob_start(); ?>
@@ -126,14 +138,14 @@ while ($comment = $comments->fetch())
                     <div class="item active">
             <?php
         $filename= "uploads/";
-        $filename .= $data['ART_IMAGE'];
+        $filename .= htmlspecialchars($data['ART_IMAGE']);
     
          if (file_exists($filename)) {
                        ?>
-                            <img src="uploads/<?= $data['ART_IMAGE'] ?>" alt="illustration <?= $data['ART_TITLE'] ?><?= $data['ART_SUBTITLE'] ?><?= $data['ART_CHAPTER'] ?>" width="1200" height="700">
+                            <img src="uploads/<?= htmlspecialchars($data['ART_IMAGE']) ?>" alt="illustration <?= htmlspecialchars($data['ART_TITLE'])?><?= htmlspecialchars($data['ART_SUBTITLE']) ?><?= htmlspecialchars($data['ART_CHAPTER']) ?>" width="1200" height="700">
                             <?php 
          }else{ ?>
-                            <img src="public/images/1.jpg" alt="illustration <?= $data['ART_TITLE'] ?>" "<?= $data['ART_SUBTITLE'] ?>" Chapitre "<?= $data['ART_CHAPTER'] ?>" width="1200" height="700">
+                            <img src="public/images/1.jpg" alt="illustration <?= htmlspecialchars($data['ART_TITLE']) ?>" "<?= htmlspecialchars($data['ART_SUBTITLE']) ?>" Chapitre "<?= htmlspecialchars($data['ART_CHAPTER']) ?>" width="1200" height="700">
 
                             <?php 
          }
@@ -141,13 +153,13 @@ while ($comment = $comments->fetch())
           ?>
                             <div class="carousel-caption">
                                 <h2>Chapitre
-                                    <?= $data['ART_CHAPTER'] ?>
+                                    <?= htmlspecialchars($data['ART_CHAPTER']) ?>
                                 </h2>
                                 <h1>
-                                    <?= $data['ART_TITLE'] ?>
+                                    <?= htmlspecialchars($data['ART_TITLE']) ?>
                                 </h1>
                                 <h3>
-                                    <?= $data['ART_SUBTITLE'] ?>
+                                    <?= htmlspecialchars($data['ART_SUBTITLE']) ?>
                                 </h3>
 
                             </div>

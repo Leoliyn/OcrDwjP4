@@ -6,6 +6,7 @@
 require_once('model/frontend/PostManager.php');
 require_once('model/frontend/CommentManager.php');
 require_once('model/frontend/BookManager.php');
+require_once('model/frontend/Manager.php');
 // rewrite des url au format (indiqué dans htaccess) Non utilisée !
 function urlRewrite($url){
 /*$url = "index.php?action=post&id=20&titre=azerty&chapitre=5";*/
@@ -19,7 +20,6 @@ $chapitre = explode('=',$param[3]);
 $url2=$action[1].$id[1]."-chapitre".$chapitre[1]."-".$titre[1].".html";
 return $url2;
 }
-
 
 //╔════════════════════════════════════════╗  
 //        List des chapitres depuis getPosts (uniquement publiés) 
@@ -42,9 +42,9 @@ function listPosts()
 function listPostsResume()
 {
     $postManager = new OpenClassrooms\DWJP4\frontend\Model\PostManager();
-    $bookManager = new OpenClassrooms\DWJP4\frontend\Model\BookManager();
+    //$bookManager = new OpenClassrooms\DWJP4\frontend\Model\BookManager();
     $posts = $postManager->getPostsResume();
-    $books = $bookManager->getBooks();
+    //$books = $bookManager->getBooks();
    require('view/frontend/listPostsView.php');
 }
 //╔════════════════════════════════════════╗  
@@ -53,19 +53,21 @@ function listPostsResume()
 // 
 function post()
 {
+
     $postManager = new OpenClassrooms\DWJP4\frontend\Model\PostManager();
     $commentManager = new OpenClassrooms\DWJP4\frontend\Model\CommentManager();
- $bookManager = new OpenClassrooms\DWJP4\frontend\Model\BookManager();
+    
+    //$bookManager = new OpenClassrooms\DWJP4\frontend\Model\BookManager();
     $article = $postManager->getPost($_GET['id']);
     $comments = $commentManager->getComments($_GET['id']);
-     $books = $bookManager->getBooks();
-   $posts = $postManager->getPostsResume();
+    //$books = $bookManager->getBooks();
+    $posts = $postManager->getPostsResume();
    
     require('view/frontend/postView.php');
 }
 
 //╔════════════════════════════════════════╗  
-// active( le rend visible) le commentaire  - lance la fonction post()
+//  active( le rend visible) le commentaire  - lance la fonction post()
 //╚════════════════════════════════════════╝
 // 
     
@@ -93,9 +95,12 @@ $comment = $commentManager->disableSignal($_GET['commId']);
 // 
 function ajoutComment()
 {
-    
+  $regex="([^a-zA-Z0-9 .,\'@ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ\?!:]+)";
+    $id =preg_replace('([^0-9]+)','',$_GET['id']);
+    $auteur =preg_replace($regex,'',$_POST['auteur']);
+    $comment =preg_replace($regex,'',$_POST['comment']);  
 $commentManager = new OpenClassrooms\DWJP4\frontend\Model\commentManager();   
-$comment = $commentManager->addComment($_GET['id'],$_POST['author'],$_POST['comment']);
+$comment = $commentManager->addComment($id,$auteur,$comment);
 post();    
 }
 //╔════════════════════════════════════════╗  
