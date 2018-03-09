@@ -4,18 +4,18 @@
 
 <?php ob_start(); ?>
 
-    <div class='resume'>
-        
-        <h3>
-            Console d'adminitration  
-            
-        </h3>
-       
-        
+<div class='resume'>
 
-<?php $content = ob_get_clean(); ?>
+    <h3>
+        Console d'adminitration  
 
-<?php require('view/backend/template.php'); ?>
+    </h3>
+
+
+
+    <?php $content = ob_get_clean(); ?>
+
+    <?php require('view/backend/template.php'); ?>
 
 
 

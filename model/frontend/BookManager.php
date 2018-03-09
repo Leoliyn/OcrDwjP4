@@ -8,12 +8,11 @@ namespace OpenClassrooms\DWJP4\frontend\Model;
 
 require_once("model/frontend/Manager.php");
 
-class bookManager extends Manager
-{
-   //renvoi ouvrage enable = 1
-    public function getBooks()
-    {
-        
+class bookManager extends Manager {
+
+    //renvoi ouvrage enable = 1
+    public function getBooks() {
+
         $db = $this->dbConnect();
         $req = $db->query('SELECT OUV_ID, OUV_TITRE,OUV_PREFACE,OUV_SOUSTITRE,OUV_AUTEUR,OUV_DESCRIPTION,OUV_KEYWORDS,OUV_ENABLE FROM ouvrage WHERE OUV_ENABLE=1');
 
@@ -21,9 +20,8 @@ class bookManager extends Manager
     }
 
 //       
-    
-    public function getBook($bookId)
-    {
+
+    public function getBook($bookId) {
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT OUV_ID, OUV_TITRE,OUV_PREFACE,OUV_SOUSTITRE,OUV_AUTEUR,OUV_DESCRIPTION,OUV_KEYWORDS,OUV_ENABLE FROM posts WHERE OUV_ID = ?');
         $req->execute(array($bookId));
@@ -31,7 +29,5 @@ class bookManager extends Manager
 
         return $post;
     }
-    
 
-    
 }

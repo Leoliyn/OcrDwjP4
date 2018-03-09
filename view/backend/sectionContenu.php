@@ -1,8 +1,6 @@
-
 <div id="article" class="container text-justify">
-   TEST  
-   <?= $content ?>
-  
+    TEST  
+    <?= $content ?>
+
 </div>
-  <br>
-  
+<br>
