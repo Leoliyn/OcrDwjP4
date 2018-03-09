@@ -4,37 +4,49 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/xampp/htdocs/JeanForteroche/view/backend/listBooksView.php</file>
-            <file>file:/C:/xampp/htdocs/JeanForteroche/model/backend/Manager.php</file>
             <file>file:/C:/xampp/htdocs/JeanForteroche/view/backend/identificationView.php</file>
+            <file>file:/C:/xampp/htdocs/JeanForteroche/view/backend/sectionContenu.php</file>
             <file>file:/C:/xampp/htdocs/JeanForteroche/view/backend/postView.php</file>
+            <file>file:/C:/xampp/htdocs/JeanForteroche/model/backend/BookManager.php</file>
+            <file>file:/C:/xampp/htdocs/JeanForteroche/view/frontend/template/sectionPersonnage.php</file>
             <file>file:/C:/xampp/htdocs/JeanForteroche/controler/frontend/frontend.php</file>
             <file>file:/C:/xampp/htdocs/JeanForteroche/view/backend/updatePasswdView.php</file>
+            <file>file:/C:/xampp/htdocs/JeanForteroche/view/backend/sectionFooter.php</file>
+            <file>file:/C:/xampp/htdocs/JeanForteroche/model/backend/CommentManager.php</file>
             <file>file:/C:/xampp/htdocs/JeanForteroche/view/backend/newPostView.php</file>
             <file>file:/C:/xampp/htdocs/JeanForteroche/view/backend/bookView.php</file>
+            <file>file:/C:/xampp/htdocs/JeanForteroche/view/frontend/template/slider.php</file>
             <file>file:/C:/xampp/htdocs/JeanForteroche/view/frontend/template.php</file>
             <file>file:/C:/xampp/htdocs/JeanForteroche/view/backend/acceuilView.php</file>
             <file>file:/C:/xampp/htdocs/JeanForteroche/controler/backend/backend.php</file>
             <file>file:/C:/xampp/htdocs/JeanForteroche/view/backend/sectionArticle.php</file>
+            <file>file:/C:/xampp/htdocs/JeanForteroche/view/frontend/modal.php</file>
+            <file>file:/C:/xampp/htdocs/JeanForteroche/view/frontend/template/newPostView.php</file>
             <file>file:/C:/xampp/htdocs/JeanForteroche/model/frontend/Manager.php</file>
             <file>file:/C:/xampp/htdocs/JeanForteroche/view/frontend/listPostsView.php</file>
             <file>file:/C:/xampp/htdocs/JeanForteroche/view/backend/head.php</file>
             <file>file:/C:/xampp/htdocs/JeanForteroche/view/frontend/template/head.php</file>
             <file>file:/C:/xampp/htdocs/JeanForteroche/view/frontend/formCommentView.php</file>
-            <file>file:/C:/xampp/htdocs/JeanForteroche/view/backend/updatePostView.php</file>
             <file>file:/C:/xampp/htdocs/JeanForteroche/view/backend/newBookView.php</file>
+            <file>file:/C:/xampp/htdocs/JeanForteroche/view/backend/updatePostView.php</file>
             <file>file:/C:/xampp/htdocs/JeanForteroche/view/backend/navbar.php</file>
+            <file>file:/C:/xampp/htdocs/JeanForteroche/view/frontend/template/factoListeMenu.php</file>
+            <file>file:/C:/xampp/htdocs/JeanForteroche/view/frontend/template/sectionContact.php</file>
             <file>file:/C:/xampp/htdocs/JeanForteroche/view/backend/erreurView.php</file>
-            <file>file:/C:/xampp/htdocs/JeanForteroche/indexadmin.php</file>
             <file>file:/C:/xampp/htdocs/JeanForteroche/index.php</file>
             <file>file:/C:/xampp/htdocs/JeanForteroche/view/backend/updateBookView.php</file>
             <file>file:/C:/xampp/htdocs/JeanForteroche/view/frontend/template/navbar.php</file>
             <file>file:/C:/xampp/htdocs/JeanForteroche/model/frontend/BookManager.php</file>
-            <file>file:/C:/xampp/htdocs/JeanForteroche/view/frontend/postView.php</file>
             <file>file:/C:/xampp/htdocs/JeanForteroche/model/backend/PostManager.php</file>
+            <file>file:/C:/xampp/htdocs/JeanForteroche/view/frontend/postView.php</file>
             <file>file:/C:/xampp/htdocs/JeanForteroche/view/backend/listPostsView.php</file>
+            <file>file:/C:/xampp/htdocs/JeanForteroche/public/css/style.css</file>
             <file>file:/C:/xampp/htdocs/JeanForteroche/model/backend/UsersManager.php</file>
             <file>file:/C:/xampp/htdocs/JeanForteroche/model/frontend/CommentManager.php</file>
-            <file>file:/C:/xampp/htdocs/JeanForteroche/.htaccess</file>
+            <file>file:/C:/xampp/htdocs/JeanForteroche/view/frontend/template/sectionArticle.php</file>
+            <file>file:/C:/xampp/htdocs/JeanForteroche/view/frontend/template/sectionFooter.php</file>
+            <file>file:/C:/xampp/htdocs/JeanForteroche/public/css/stylefront.css</file>
+            <file>file:/C:/xampp/htdocs/JeanForteroche/view/backend/template.php</file>
             <file>file:/C:/xampp/htdocs/JeanForteroche/model/frontend/PostManager.php</file>
         </group>
     </open-files>

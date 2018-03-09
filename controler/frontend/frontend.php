@@ -105,44 +105,28 @@ function ajoutComment() {
 //   Fonction préparation puis envoi du courriel de contact
 //     - lance le script modal.php
 //╚════════════════════════════════════════╝
-//    
+// 
 function message($nom, $mailExpediteur, $texte) {
-    $mail = 'webmaster@lionelclaudey.com'; // Adresse de destination.
-    if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $mail)) { // On filtre les serveurs qui rencontrent des bogues.
-        $passage_ligne = "\r\n";
+// Mettez ici votre adresse valide
+    $passage_ligne = "\n";
+    $to = "lionel.claudey@laposte.net";
+
+// Sujet du message 
+    $subject = "Message Internaute pour Jean FORTEROCHE";
+
+// Corps du message, écrit en texte et encodage iso-8859-1
+    $message = "Message de :" . $nom . "  Adresse Mail : " . $mailExpediteur . $passage_ligne . $texte;
+
+// En-têtes du message
+    $headers = ""; // on vide la variable
+    $headers = "From: Webmaster Site <claudey@lionelclaudey.com>\n"; // ajout du champ From
+// $headers = $headers."MIME-Version: 1.0\n"; // ajout du champ de version MIME
+    $headers = $headers . "Content-type: text/plain; charset=iso-8859-1\n"; // ajout du type d'encodage du corps
+// Appel à la fonction mail
+    if (mail($to, $subject, $message, $headers) == TRUE) {
+        $info = "Envoi du mail réussi.";
     } else {
-        $passage_ligne = "\n";
-    }
-//=====Définition du sujet.
-    $sujet = "Message Internaute pour Jean FORTEROCHE";
-
-//=====Déclaration des messages au format texte 
-
-    $message_txt = "Message de :" . $nom . "  Adresse Mail : " . $mailExpediteur . $passage_ligne . $texte;
-//==========
-//=====Création de la boundary
-    $boundary = "-----=" . md5(rand());
-//==========
-//=====Création du header de l'e-mail.
-    $header = "From: \"webmaster@lionelclaudey.com\"<webmaster@lionelclaudey.com>" . $passage_ligne;
-    $header .= "Reply-to: \"webmaster@lionelclaudey.com\"<webmaster@lionelclaudey.com>" . $passage_ligne;
-    $header .= "MIME-Version: 1.0" . $passage_ligne;
-    $header .= "Content-Type: multipart/alternative;" . $passage_ligne . " boundary=\"$boundary\"" . $passage_ligne;
-//==========
-//=====Création du message.
-    $message = $passage_ligne . "--" . $boundary . $passage_ligne;
-//=====Ajout du message au format texte.
-    $message .= "Content-Type: text/plain; charset=\"ISO-8859-1\"" . $passage_ligne;
-    $message .= "Content-Transfer-Encoding: 8bit" . $passage_ligne;
-    $message .= $passage_ligne . $message_txt . $passage_ligne;
-//==========
-    $message .= $passage_ligne . "--" . $boundary . $passage_ligne;
-
-    //=====Envoi de l'e-mail.
-    if (mail($mail, $sujet, $message, $header)) {
-        $info = "Message envoyé";
-    } else {
-        $info = "Message non envoyé réessayez plus tard !";
+        $info = "Erreur : l'envoi du mail a échoué.";
     }
     return $info;
 }
