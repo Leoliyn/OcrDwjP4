@@ -10,6 +10,16 @@ require_once("model/backend/Manager.php");
 
 class PostManager extends Manager {
 
+    //récupération du numéro de chapitre maximum
+    public function getMaxChapter() {
+        $db = $this->dbConnect();
+        $req = $db->query('SELECT MAX(ART_CHAPTER) FROM `posts` ');
+        $chapter = $req->fetch();
+
+        return $chapter;   
+        
+    }
+    
     //recuperation des posts enable
     public function getPosts() {
 

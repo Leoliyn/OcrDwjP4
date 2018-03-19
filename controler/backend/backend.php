@@ -65,6 +65,9 @@ function book() {
     require('view/backend/bookView.php');
 }
 
+
+
+
 //╔════════════════════════════════════════╗  
 //   1 chapitre depuis ID + les commentaires de ce chapitre
 //╚════════════════════════════════════════╝
@@ -102,9 +105,15 @@ function formModifyBook() {
 //╔══════════════════════════════════════════╗  
 //    vue formulaire nouveau chapitre
 //╚══════════════════════════════════════════╝
+//╔════════════════════════════════════════╗  
+//   Récupération Chapitre num Max 
+//╚════════════════════════════════════════╝
 //
 function formNewPost() {
 
+
+    $postManager = new OpenClassrooms\DWJP4\Backend\Model\PostManager();
+    $chapter = $postManager->getMaxChapter(); 
     require('view/backend/newPostView.php');
 }
 
