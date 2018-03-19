@@ -130,27 +130,29 @@ function uploadImage($postId) {
 
 
     if (!empty($_FILES['uploaded_file']['name'])) {
-        $extensions_valides = array('jpg');
+        $extensions_valides = array('.jpg');
 //1. strrchr renvoie l'extension avec le point (« . »).
 //2. strtolower met l'extension en minuscules.
         $extension_upload = strtolower(strrchr($_FILES['uploaded_file']['name'], '.'));
         $path = "uploads/";
         $_FILES['uploaded_file']['name'] = 'chapitre-' . $article['ART_CHAPTER'] . $extension_upload;
-/////
+
 // On récupère les dimensions de l'image
+        
         $dimensions = getimagesize($_FILES['uploaded_file']['tmp_name']);
         $width_orig = $dimensions[0];
         $height_orig = $dimensions[1];
-        $ratio_orig = $width_orig / $height_orig;
+        //$ratio_orig = $width_orig / $height_orig;
 
 
         $path = $path . basename($_FILES['uploaded_file']['name']);
-        echo $path;
+       
         if (in_array($extension_upload, $extensions_valides)) {
+            // Si le fichier existe on l'efface
             if (is_file($path)) {
                 unlink($path);
             }
-        } elseif (move_uploaded_file($_FILES['uploaded_file']['tmp_name'], $path)) {
+            move_uploaded_file($_FILES['uploaded_file']['tmp_name'], $path);
             $message = "Le fichier " . basename($_FILES['uploaded_file']['name']) .
                     " à été uploadé";
             $image = $_FILES['uploaded_file']['name'];
@@ -163,12 +165,16 @@ function uploadImage($postId) {
             $image_src = imagecreatefromjpeg($path);
             imagecopyresampled($image_dst, $image_src, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
             imagejpeg($image_dst, $path, 100);
-            ////////////////////////////////
+           
         } else {
-            $message = "Une erreur s'est produite durant l'opération Veuillez vérifier le format du fichier( jpg , jpeg , gif , 'png). Veuillez réessayer . Si le problème persiste , contactez votre administrateur ";
+            ?>
+        <script>
+            alert("Une erreur s'est produite durant l'opération Veuillez vérifier le format du fichier( jpg ). Veuillez réessayer . Si le problème persiste , contactez votre administrateur ");
+        </script>
+        <?php
+            
         }
-    } else {
-        echo ' cest par la ';
+
     }
     return $image;
 }
