@@ -12,8 +12,8 @@ class CommentManager extends Manager {
 
     public function getComments($postId) {
         $db = $this->dbConnect();
-        $comments = $db->prepare('SELECT COMM_ID,COMM_ARTID,COMM_PSEUDO,COMM_TITRE,COMM_CONTENU,SIGNALE,DISABLE, DATE_FORMAT(COMM_DATE, \'%d/%m/%Y à %Hh%imin%ss\') AS COMM_date_fr FROM comments WHERE COMM_ARTID = ? ORDER BY COMM_DATE DESC');
-        $comments->execute(array($postId));
+        $comments = $db->prepare('SELECT COMM_ID,COMM_ARTID,COMM_PSEUDO,COMM_TITRE,COMM_CONTENU,SIGNALE,DISABLE, DATE_FORMAT(COMM_DATE, \'%d/%m/%Y à %Hh%imin%ss\') AS COMM_date_fr FROM comments WHERE COMM_ARTID = ? AND DISABLE= ? ORDER BY COMM_DATE DESC');
+        $comments->execute(array($postId,0));
         return $comments;
     }
 

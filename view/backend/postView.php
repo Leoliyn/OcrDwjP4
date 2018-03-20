@@ -7,13 +7,17 @@
 $data = $article;
 ?>
 <div class=''>
-    <img src='./uploads/<?= htmlspecialchars($data['ART_IMAGE']) ?>' class="miniature" />
+    <?php
+    $file="./uploads/".htmlspecialchars($data['ART_IMAGE']);
+    if(is_file($file))
+  {
+    ?>
+    <img src="<?= $file ?>" class="miniature" />
     <br />
     <?php
-    if (isset($message)) {
-
-        echo $message;
-    }
+  }else{
+  }
+  
     ?>
     <h3>
     <?= htmlspecialchars($data['ART_TITLE']) ?>

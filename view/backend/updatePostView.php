@@ -27,11 +27,19 @@ $data = $article;
         <label> Description</label><input style="width: 100%;" name="art_description" id="art_description" value="<?= htmlspecialchars($data['ART_DESCRIPTION']) ?>" /><br />
         <label> Mots clés (séparés par une virgule)</label><input style="width: 100%;" name="art_keywords" id="art_keywords"  value="<?= htmlspecialchars($data['ART_KEYWORDS']) ?>"/><br />   
         <br />
+         <?php
+    $file="./uploads/".htmlspecialchars($data['ART_IMAGE']);
+    if(is_file($file))
+  {
+    ?>
         <img src='./uploads/<?= htmlspecialchars($data['ART_IMAGE']) ?>' class="miniature" />
         <br />
         <label> Image du chapitre :<?= htmlspecialchars($data['ART_IMAGE']) ?>
+            <?php
+  }
+            ?>
             <br />
-            Pour changer l'image cliquez sur Parcourir (1600x550 ou de ratio 2.909)</label> <input type="file" name="uploaded_file" /> 
+            Pour changer ou charger une image cliquez sur Parcourir (1600x550 ou de ratio 2.909)</label> <input type="file" name="uploaded_file" /> 
         <br />
 
 

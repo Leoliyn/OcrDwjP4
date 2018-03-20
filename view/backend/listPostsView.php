@@ -9,7 +9,15 @@ while ($data = $posts->fetch()) {
     ?>
 
     <div class='resume'>
+        <?php
+    $file="./uploads/".htmlspecialchars($data['ART_IMAGE']);
+    if(is_file($file))
+  {
+        ?>
         <img src='./uploads/<?= htmlspecialchars($data['ART_IMAGE']) ?>' class="miniature" />
+        <?php
+  }
+        ?>
         <h3>
             <p>Chapitre:  <?= htmlspecialchars($data['ART_CHAPTER']) ?></p>
             <?= htmlspecialchars($data['ART_TITLE']) ?>

@@ -224,8 +224,7 @@ function ajouterPost() {
     $postManager = new OpenClassrooms\DWJP4\Backend\Model\PostManager();
     $dernierId = $postManager->addPost($chapter, $titre, $subtitle, $_POST['art_content'], $description, $keywords);
     $image = uploadImage($dernierId);
-    echo "Ceci est le dernier img : " . $image;
-    echo "Ceci est le dernier id : " . $dernierId;
+    
 
     $article = $postManager->updatePost($chapter, $titre, $subtitle, $_POST['art_content'], 1, $dernierId, $description, $keywords, $image);
     $_GET['id'] = $dernierId;
