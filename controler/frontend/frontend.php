@@ -94,7 +94,7 @@ function desactiveSignal() {
 function ajoutComment() {
     $regex = "([^a-zA-Z0-9 .,\'@ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ\?!:]+)";
     $id = preg_replace('([^0-9]+)', '', $_GET['id']);
-    $auteur = preg_replace($regex, '', $_POST['auteur']);
+    $auteur = preg_replace($regex, '', $_POST['author']);
     $comment = preg_replace($regex, '', $_POST['comment']);
     $commentManager = new OpenClassrooms\DWJP4\frontend\Model\commentManager();
     $comment = $commentManager->addComment($id, $auteur, $comment);
