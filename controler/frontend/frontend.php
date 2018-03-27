@@ -6,8 +6,8 @@
 require_once('model/frontend/PostManager.php');
 require_once('model/frontend/CommentManager.php');
 require_once('model/frontend/BookManager.php');
-require_once('model/frontend/Manager.php');
-
+//require_once('model/frontend/Manager.php');
+require_once('model/commun/Manager.php');
 // rewrite des url au format (indiqué dans htaccess) Non utilisée !
 function urlRewrite($url) {
     /* $url = "index.php?action=post&id=20&titre=azerty&chapitre=5"; */

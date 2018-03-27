@@ -3,68 +3,44 @@
 //           PROJET 4 DWJ OPENCLASSROOMS         
 //           CLAUDEY Lionel Février 2018           
 //╚═════════════════════════════╝
-//GESTION DES UTILISATEURS  LISTE - AJOUTER- MODIFIER- SUPPRIMER - CHANGER PSSQWD -CONNEXION VERIF 
+//GESTION DE L'UTILISATEUR   CHANGER PSSQWD -CONNEXION -hash
 namespace OpenClassrooms\DWJP4\Backend\Model;
 require_once("model/commun/Manager.php");
 use OpenClassrooms\DWJP4\Commun\Model\Manager;
 
 class UsersManager extends Manager {
 
-    // Méthode création sha1 du password
+    // Méthode création bcrypt du password
     public function passwordUser($password) {
-        $mdp = sha1($password);
-
+        $mdp = password_hash($password,PASSWORD_BCRYPT);
         return $mdp;
     }
 
-    // methode de création d un utilisateur 
-    public function createUser($userName, $userLastname, $userPseudo, $userMail, $userPsswd, $userstatut) {
-        $db = $this->dbConnect();
-        $req = $db->prepare('INSERT INTO users (USER_NAME,USER_LASTNAME,USER_PSEUDO,USER_MAIL,USER_PSSWD,USER_STATUT)VALUES
-(:userName,:userLastname,:userPseudo,:userMail,:userPsswd,:userstatut');
-        $req->execute(array($userName, $userLastname, $userPseudo, $userMail, $userPsswd, $userstatut));
-        return $req;
-    }
 
-    public function getUser($id) {
-        $db = $this->dbConnect();
-        $req = $db->query('SELECT USER_NAME,USER_LASTNAME,USER_PSEUDO,USER_MAIL,USER_PSSWD,USER_STATUT FROM users WHERE USER_ID= ?');
-        $req->execute(array($id));
-        return $req;
-    }
-
-    public function delUser($id) {
-        $db = $this->dbConnect();
-        $req = $db->prepare('DELETE FROM users WHERE USER_ID = :id');
-        $req->execute(array($id));
-        return $req;
-    }
-
-    public function updatePsswd($userPsswd) {
+    public function updatePsswdAdmin($userPsswd) {
         $psswd = $this->passwordUser($userPsswd);
         $db = $this->dbConnect();
         $req = $db->prepare('UPDATE users SET  USER_PASSWD=? WHERE USER_PSEUDO= ?');
         $req->execute(array($psswd, 'admin'));
+        return $req;
     }
 
-    public function updateUser($userName, $userLastname, $userPseudo, $userMail, $userPsswd, $userstatut) {
-        $db = $this->dbConnect();
-        $req = $db->prepare('UPDATE users SET  USER_NAME= ?,USER_LASTNAME=?,USER_PSEUDO=?,USER_MAIL=?,USER_PASSWD=?,USER_STATUT=?, WHERE id= ?');
-        $req->execute(array($userName, $userLastname, $userPseudo, $userMail, $userPsswd, $userstatut));
-    }
-
-// methode connexion compare les identifiant de connexion avec la base users 
-    public function connexion($pseudo, $password) {
+    
+   // Verifie qu'une seule répose à la requete sur le login puis verify par bcript que le mot de passe est bon  
+  public function connexion($pseudo, $password) {
         $db = $this->dbConnect();
         $nbrow = 0;
-        $pwd = $this->passwordUser($password); //hash du mot de passe
-        $req = $db->prepare('SELECT * FROM users WHERE USER_PSEUDO = ? AND USER_PASSWD = ?');
-        $req->execute(array($pseudo, $pwd));
+        $req = $db->prepare('SELECT * FROM users WHERE USER_PSEUDO = ? ');
+        $req->execute(array($pseudo));
         $row = $req->fetchAll();
-
         $nbrow = count($row);
-
-        return $nbrow;  // si nb  ligne = 0 alors erreur d'identification   
+        $verify = password_verify($password,$row[0]['USER_PASSWD']);
+        if($verify && ($nbrow === 1)) {
+        return 1;
+        }else {
+        return 0;  //  pb d'identification 
     }
+      
 
+}
 }

@@ -12,12 +12,15 @@ function changePsswd() {
     if ((!empty($_POST['oldmdp']))AND ( strlen($_POST['mdp']) >= 6)) {
         $userManager = new OpenClassrooms\DWJP4\Backend\Model\UsersManager();
         $connexion = $userManager->connexion('admin', $_POST['oldmdp']);
-        if ($connexion > 0) {
-            $user = $userManager->updatePsswd($_POST['mdp']);
-            $message = 'Mot de passe enregistré.';
+        if ($connexion) {
+         $user = $userManager->updatePsswdAdmin($_POST['mdp']);
+         $message = 'Mot de passe enregistré.';
+         
         } else {
-            $message = 'Identifiant incorrects ou Réessayez plus tard! ';
+            $message = 'Identifiant incorrects ou le nouveau  mot de passedoit être au mopins égal à 6 caractères Sinon Réessayez plus tard! ';
         }
+    }else {
+        $message = ' Un champ ne peut être vide.';
     }
     require ('view/backend/updatePasswdView.php');
 }
@@ -364,14 +367,13 @@ function verifUser() {
     $userValid = FALSE;
     $userManager = new OpenClassrooms\DWJP4\Backend\Model\usersManager();
     $connect = $userManager->connexion(($_POST['usrname']), ($_POST['passwd']));
-
-    if ($connect > 0) {
+    if ($connect) {
         $_SESSION['user'] = 'admin';
         $userValid = TRUE;
     } else {
-        $userValid = FALSE;
-    }
-    return $userValid;
+       $userValid = FALSE;
+   }
+   return $userValid;
 }
 
 //╔══════════════════════════════════════════╗  
