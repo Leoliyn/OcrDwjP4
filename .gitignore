@@ -1,4 +1,6 @@
-model/frontend/manager.php
-model/backend/manager.php
-model/frontend/manager2.php
-model/backend/manager2.php
+model/frontend/Manager.php
+model/backend/Manager.php
+model/frontend/Manager2.php
+model/backend/Manager2.php
+model/commun/Config.php
+lionelclaudey.sql

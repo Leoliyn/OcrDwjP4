@@ -5,8 +5,8 @@
 //╚═════════════════════════════╝
 //GESTION DES CHAPITRES LISTE 
 namespace OpenClassrooms\DWJP4\frontend\Model;
-
-require_once("model/frontend/Manager.php");
+require_once("model/commun/Manager.php");
+use OpenClassrooms\DWJP4\Commun\Model\Manager;
 
 class PostManager extends Manager {
 

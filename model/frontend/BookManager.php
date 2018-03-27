@@ -6,8 +6,8 @@
 //GESTION DES OUVRAGES  LISTES
 namespace OpenClassrooms\DWJP4\frontend\Model;
 
-require_once("model/frontend/Manager.php");
-
+require_once("model/commun/Manager.php");
+use OpenClassrooms\DWJP4\Commun\Model\Manager;
 class bookManager extends Manager {
 
     //renvoi ouvrage enable = 1

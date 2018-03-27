@@ -6,8 +6,8 @@
 //GESTION DES COMMENTAIRES  LISTE - AJOUTER- SIGNALEMENT - DESIGNALEMENT
 namespace OpenClassrooms\DWJP4\frontend\Model;
 
-require_once("model/frontend/Manager.php");
-
+require_once("model/commun/Manager.php");
+use OpenClassrooms\DWJP4\Commun\Model\Manager;
 class CommentManager extends Manager {
 
     public function getComments($postId) {

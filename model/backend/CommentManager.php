@@ -5,8 +5,8 @@
 //╚═════════════════════════════╝
 //GESTION DES COMMENTAIRES  LISTE - AJOUTER- MODIFIER- SUPPRIMER -SUPPRIMER -ACTIVER- DESACTIVER -SIGNALER -'DESIGNALER'
 namespace OpenClassrooms\DWJP4\Backend\Model;
-
-require_once("model/backend/Manager.php");
+require_once("model/commun/Manager.php");
+use OpenClassrooms\DWJP4\Commun\Model\Manager;
 
 class CommentManager extends Manager {
 

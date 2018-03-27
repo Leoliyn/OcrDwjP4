@@ -5,8 +5,8 @@
 //╚═════════════════════════════╝
 //GESTION DES OUVRAGES  LISTE - AJOUTER- MODIFIER- SUPPRIMER -SUPPRIMER -ACTIVER- DESACTIVER
 namespace OpenClassrooms\DWJP4\backend\Model;
-
-require_once("model/backend/Manager.php");
+require_once("model/commun/Manager.php");
+use OpenClassrooms\DWJP4\Commun\Model\Manager;
 
 class BookManager extends Manager {
 
