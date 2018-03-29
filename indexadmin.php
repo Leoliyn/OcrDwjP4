@@ -10,7 +10,21 @@ require_once('controler/backend/backend.php');
 
 
 try {
-    if (isset($_SESSION['user'])AND ($_SESSION['user']=='admin')) 
+     
+    if (isset($_GET['action']) AND ($_GET['action']=='deconnexion'))
+    {
+        $_SESSION = [];
+        session_destroy();
+        header('Location: index.php?');
+        exit(); 
+    }
+    elseif (isset($_POST['emailForget']))
+   {
+        $mail= $_POST['emailForget'];
+        
+        motDePasseOublie($mail);
+   }
+    elseif (isset($_SESSION['user'])AND ($_SESSION['user']=='admin')) 
     {
         
         if(isset($_GET['action'])AND ($_GET['action']=='enablePost')AND (isset($_GET['id'])))
@@ -149,13 +163,6 @@ try {
             identification(FALSE);
         }
   
-  
-    
-    elseif (isset($_GET['action']) AND ($_GET['action']=='deconnexion'))
-    {
-        deconnexion();
-        
-    }
         
     else { 
       

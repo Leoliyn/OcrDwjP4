@@ -9,7 +9,8 @@ require_once('model/backend/UsersManager.php');
 require_once('model/backend/BookManager.php');
 
 function changePsswd() {
-    if ((!empty($_POST['oldmdp']))AND ( strlen($_POST['mdp']) >= 6)) {
+    
+    if ((!empty($_POST['oldmdp']))AND ( strlen($_POST['mdp']) >= 6)AND ($_POST['mdp']===$_POST['remdp'])) {
         $userManager = new OpenClassrooms\DWJP4\Backend\Model\UsersManager();
         $connexion = $userManager->connexion('admin', $_POST['oldmdp']);
         if ($connexion) {
@@ -17,7 +18,7 @@ function changePsswd() {
          $message = 'Mot de passe enregistré.';
          
         } else {
-            $message = 'Identifiant incorrects ou le nouveau  mot de passedoit être au mopins égal à 6 caractères Sinon Réessayez plus tard! ';
+            $message = 'Identifiant incorrects ou le nouveau  mot de passe doit être au moins égal à 6 caractères Sinon Réessayez plus tard! ';
         }
     }else {
         $message = ' Un champ ne peut être vide.';
@@ -417,3 +418,61 @@ function desactiveSignal() {
     $comment = $commentManager->disableSignal($_GET['commId']);
     post();
 }
+function codeValidation(){
+    $chaine="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    $code='';
+    $longeurChaine= strlen($chaine);
+    echo $longeurChaine;
+    $nbCaractereCode= 8;
+    for ($i = 0; $i < $nbCaractereCode; $i++)
+ {
+ $code .= $chaine[rand(0, $longeurChaine - 1)];
+ }
+   return $code;
+}
+ 
+function messagePasswdOublie($destinataire, $texte) {
+
+    $passage_ligne = "\n";
+    $to = $destinataire;
+
+// Sujet du message 
+    $subject = "Votre demande depuis le blog de  Jean FORTEROCHE";
+
+// Corps du message, écrit en texte et encodage iso-8859-1
+    $message = "Suite à votre demande, veuillez prendre note du code suivant :".$texte."\n";
+    $message .= "Vous voudrez bien vous connecter et changer votre mot de passe dès la première connexion \n";
+    $message .= "Bonne réception \n Webmaster blog de jean FORTEROCHE";
+// En-têtes du message
+    $headers = ""; // on vide la variable
+    $headers = "From: Webmaster Site <claudey@lionelclaudey.com>\n"; // ajout du champ From
+// $headers = $headers."MIME-Version: 1.0\n"; // ajout du champ de version MIME
+    $headers = $headers . "Content-type: text/plain; charset=iso-8859-1\n"; // ajout du type d'encodage du corps
+// Appel à la fonction mail
+    if (mail($to, $subject, $message, $headers) == TRUE) {
+        $info = "Envoi du mail réussi.";
+    } else {
+        $info = "Erreur : l'envoi du mail a échoué.";
+    }
+    return $info;
+}
+
+function motDePasseOublie($mail) {
+    // le mail existe il ?
+     $userManager = new OpenClassrooms\DWJP4\Backend\Model\UsersManager();
+     $emailExist = $userManager->emailExist($mail);
+    if($emailExist){
+        //S'il existe, on fabrique le code , on update le code , on envoi le message
+        $pseudo=$emailExist[0]['USER_PSEUDO'];
+        $code = codeValidation();
+        //echo $pseudo;
+       // echo " code : ".$code;
+        $updatePassword = $userManager->updatePsswd($code,$pseudo);
+        $message = messagePasswdOublie($mail,$code);
+            //echo $message;
+    }else {
+        //echo "pas de mail exist";
+    }
+    // on retourne sur la page d'identification
+    require ('view/backend/identificationView.php');   
+} 
