@@ -39,11 +39,5 @@ class CommentManager extends Manager {
         return $reqcomment;
     }
 
-    public function disableSignal($commId) {
-        $db = $this->dbConnect();
-        $reqcomment = $db->prepare('UPDATE comments SET  SIGNALE = ?  WHERE COMM_ID = ?');
-        $reqcomment->execute(array(0, $commId));
-        return $reqcomment;
-    }
-
+    
 }

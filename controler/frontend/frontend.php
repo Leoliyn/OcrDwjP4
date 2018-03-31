@@ -52,7 +52,7 @@ function post() {
 
 }
 //╔══════════════════════════════════════════╗  
-//  active( le rend visible) le commentaire  - lance la fonction post()
+//  Signale le commentaire  - lance la fonction post()
 //╚══════════════════════════════════════════╝
 // 
     
@@ -62,16 +62,6 @@ function activeSignal() {
     post();
 }
 
-//╔════════════════════════════════════════╗  
-//   désactive  le commentaire(invisible)  - lance la fonction post()
-//╚════════════════════════════════════════╝
-// 
-function desactiveSignal() {
-
-    $commentManager = new OpenClassrooms\DWJP4\frontend\Model\commentManager();
-    $comment = $commentManager->disableSignal($_GET['commId']);
-    post();
-}
 
 //╔════════════════════════════════════════╗  
 //   Ajoute un commentaire au chapitre puis lance la fonction post()
