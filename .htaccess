@@ -7,4 +7,8 @@ RewriteRule ^chapitre-([0-9]+)-(.*)-([0-9]+)\.html$ index.php?action=post&id=$3 
 RewriteRule ^commentaire([a-zA-Z0-9]+)$ index.php?action=addComment&id=$1 [L]
 RewriteRule ^signalement([a-zA-Z0-9]+)-([a-zA-Z0-9]+)$ index.php?action=enableSignal&commId=$1&id=$2 [L]
 RewriteRule ^acceuil$ index.php [L]
-
+#ErrorDocument 401 /index.php
+#ErrorDocument 403 /index.php
+ErrorDocument 404 /index.php
+#ErrorDocument 500 /index.php
+Options -Indexes
