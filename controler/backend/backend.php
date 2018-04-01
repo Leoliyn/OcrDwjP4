@@ -81,9 +81,13 @@ function post() {
     $commentManager = new OpenClassrooms\DWJP4\Backend\Model\CommentManager();
 
     $article = $postManager->getPost($_GET['id']);
-    $comments = $commentManager->getComments($_GET['id']);
-
-    require('view/backend/postView.php');
+    
+    if($article){
+        $comments = $commentManager->getComments($_GET['id']);
+        require('view/backend/postView.php'); 
+    }else {
+    throw new Exception ('Chapitre inconnu');
+    }
 }
 
 //╔════════════════════════════════════════╗  
@@ -93,9 +97,12 @@ function post() {
 function formModifyPost() {
     $postManager = new OpenClassrooms\DWJP4\Backend\Model\PostManager();
     $article = $postManager->getPost($_GET['id']);
+    if($article){
     require('view/backend/updatePostView.php');
+}else {
+    throw new Exception ('Chapitre inconnu');
 }
-
+}
 //╔══════════════════════════════════════════╗  
 //   1 Ouvrage depuis son ID - vue formulaire modification de l'ouvrage
 //╚══════════════════════════════════════════╝
@@ -211,9 +218,14 @@ function majPost() {
     $postManager = new OpenClassrooms\DWJP4\Backend\Model\PostManager();
 
     $article = $postManager->updatePost($chapter, $titre, $subtitle, $_POST['art_content'], 1, $id, $description, $keywords, $image);
+    if($article){
     $_GET['id'] = $id;
     post();
+}else{
+    throw new Exception ('Le chapitre est introuvable');
 }
+
+    }
 
 function ajouterPost() {
     $regex = "([^a-zA-Z0-9 .,\'@ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ]+)";
@@ -288,7 +300,11 @@ function supprimePost() {
 
     $postManager = new OpenClassrooms\DWJP4\Backend\Model\PostManager();
     $post = $postManager->delPost($_GET['id']);
-    listPostsResume();
+  if($post){
+     listPostsResume();
+  }else{
+ throw new Exception ('Elément inconnu');   
+}
 }
 
 //╔══════════════════════════════════════════╗  
@@ -311,9 +327,12 @@ function desactiverPost() {
 
     $postManager = new OpenClassrooms\DWJP4\Backend\Model\PostManager();
     $post = $postManager->disablePost($_GET['id']);
+    if($post){
     post();
+}else{
+ throw new Exception ('Chapitre inconnu');   
 }
-
+}
 //╔══════════════════════════════════════════╗  
 //    Publie un chapitre ( rendre visible )
 //╚══════════════════════════════════════════╝
@@ -322,7 +341,11 @@ function publierPost() {
 
     $postManager = new OpenClassrooms\DWJP4\Backend\Model\PostManager();
     $post = $postManager->enablePost($_GET['id']);
+    if($post){
     post();
+}else{
+ throw new Exception ('Chapitre inconnu');   
+}
 }
 
 //╔══════════════════════════════════════════╗  
@@ -384,7 +407,11 @@ function verifUser() {
 function activeComment() {
     $commentManager = new OpenClassrooms\DWJP4\Backend\Model\commentManager();
     $comment = $commentManager->enableComment($_GET['commId']);
+    if($comment){
     post();
+}else{
+ throw new Exception ('Elément inconnu');   
+}
 }
 
 //╔══════════════════════════════════════════╗  
@@ -394,7 +421,11 @@ function activeComment() {
 function desactiveComment() {
     $commentManager = new OpenClassrooms\DWJP4\Backend\Model\commentManager();
     $comment = $commentManager->disableComment($_GET['commId']);
+    if($comment){
     post();
+}else{
+ throw new Exception ('Elément inconnu');   
+}
 }
 
 //╔══════════════════════════════════════════╗  
@@ -404,9 +435,12 @@ function desactiveComment() {
 function activeSignal() {
     $commentManager = new OpenClassrooms\DWJP4\Backend\Model\commentManager();
     $comment = $commentManager->enableSignal($_GET['commId']);
+    if($comment){
     post();
+}else{
+ throw new Exception ('Elément inconnu');   
 }
-
+}
 //╔══════════════════════════════════════════╗  
 //    Supprime le signalement d'un commentaire 
 //╚══════════════════════════════════════════╝
@@ -416,7 +450,11 @@ function desactiveSignal() {
 
     $commentManager = new OpenClassrooms\DWJP4\Backend\Model\commentManager();
     $comment = $commentManager->disableSignal($_GET['commId']);
+    if($comment){
     post();
+}else{
+ throw new Exception ('Elément inconnu');   
+}
 }
 function codeValidation(){
     $chaine="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

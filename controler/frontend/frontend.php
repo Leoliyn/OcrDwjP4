@@ -44,12 +44,15 @@ function post() {
 
     //$bookManager = new OpenClassrooms\DWJP4\frontend\Model\BookManager();
     $article = $postManager->getPost($_GET['id']);
+    if($article){
     $comments = $commentManager->getComments($_GET['id']);
     //$books = $bookManager->getBooks();
     $posts = $postManager->getPostsResume();
 
    require('view/frontend/postView.php'); 
-
+}else {
+    throw new Exception ('Chapitre inconnu');
+}
 }
 //╔══════════════════════════════════════════╗  
 //  Signale le commentaire  - lance la fonction post()
