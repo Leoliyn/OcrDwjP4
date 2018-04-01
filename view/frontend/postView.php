@@ -28,12 +28,11 @@ while ($data = $posts->fetch()) {
     $titre0 = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', htmlspecialchars($data['ART_TITLE']));
     $titre = strtr($titre0, " '@ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ", "--aAAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy");
     ?>
-
-    <!--  <li><a href="<?= $data['ART_ID'] ?>.chapitre<?= $data['ART_CHAPTER'] ?>.<?= $titre ?>.html">chapitre<?= $data['ART_CHAPTER'] ?>-<?= $data['ART_TITLE'] ?> </a>
-    </li>-->
     <li><a href="chapitre-<?= htmlspecialchars($data['ART_CHAPTER']) ?>-<?= htmlspecialchars($titre) ?>-<?= htmlspecialchars($data['ART_ID']) ?>.html">chapitre<?= htmlspecialchars($data['ART_CHAPTER']) ?>-<?= htmlspecialchars($data['ART_TITLE']) ?> </a>
     </li>
-    <?php
+   
+    <?php 
+$tabPagination[]=$data['ART_CHAPTER'];
 }
 
 $posts->closeCursor();
@@ -53,7 +52,8 @@ $title = "Chapitre " . htmlspecialchars($data['ART_CHAPTER']) . ',' . htmlspecia
 $description = htmlspecialchars($data['ART_DESCRIPTION']);
 $keywords = htmlspecialchars($data['ART_KEYWORDS']);
 $image = 'uploads/' . htmlspecialchars($data['ART_IMAGE']);
-?>
+?> 
+    
 <div class=''>
 
     <h3>
@@ -62,11 +62,12 @@ $image = 'uploads/' . htmlspecialchars($data['ART_IMAGE']);
     </h3>
 
     <p><em>le <?= htmlspecialchars($data['DATE_fr']) ?></em></p>
-    <p>
+  
 <?= $data['ART_CONTENT'] ?>
-    </p>
+
 
 </div>
+    
 <div class='text-center'>
     <h2>Votre commentaire</h2>
 
@@ -93,7 +94,7 @@ $image = 'uploads/' . htmlspecialchars($data['ART_IMAGE']);
 <?php
 while ($comment = $comments->fetch()) {
     ?>
-    <div class=''>
+    <div id="com<?= htmlspecialchars($comment['COMM_ID']);?>">
     <?php
     $commentSignale = $comment['SIGNALE'];
     if ($commentSignale) {

@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 ini_set('display_errors', 1);
 //╔═════════════════════════════╗  
@@ -8,6 +7,7 @@ ini_set('display_errors', 1);
 //╚═════════════════════════════╝
 
 require_once 'controler/frontend/frontend.php';
+try { // On essaie
 if (isset($_GET['action'])AND ( $_GET['action'] == 'post')AND ( isset($_GET['id']))) {
     post();
 } elseif (isset($_GET['action'])AND ( $_GET['action'] == 'addComment') AND ( isset($_GET['id']))) {
@@ -42,4 +42,9 @@ if (isset($_GET['action'])AND ( $_GET['action'] == 'post')AND ( isset($_GET['id'
 } else {
 
     listPostsResume();
+}
+}
+catch(Exception $e) { // S'il y a eu une erreur, alors...
+echo 'Erreur : ' . $e->getMessage();
+
 }

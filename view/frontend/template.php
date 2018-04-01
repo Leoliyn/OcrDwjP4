@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 
-<html>
+<html lang="fr">
 
     <?php require_once 'view/frontend/template/head.php'; ?>
 
