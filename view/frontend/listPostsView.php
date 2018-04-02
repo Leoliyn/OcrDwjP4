@@ -92,7 +92,7 @@ $image = 'public/images/couverture2.jpg';
 
     $carousel .= '<img class="imgCarousel" src="uploads/' . htmlspecialchars($data['ART_IMAGE']) . '" alt="illustration chapitre" >';
     $carousel .= '<div class="carousel-caption">';
-    $carousel .= '<a class="lienSlider" href="chapitre-' . htmlspecialchars($data['ART_CHAPTER']) . '-' . htmlspecialchars($titre) . '-' . htmlspecialchars($data['ART_ID']) . '.html" ><h3>' . $data['ART_TITLE'] . " Chapitre " . $data['ART_CHAPTER'] . '"';
+    $carousel .= '<a class="lienSlider" href="chapitre-' . htmlspecialchars($data['ART_CHAPTER']) . '-' . htmlspecialchars($titre) . '-' . htmlspecialchars($data['ART_ID']) . '.html" ><h3>' . $data['ART_TITLE'] . " Chapitre " . $data['ART_CHAPTER'];
     $carousel .= '<br />' . htmlspecialchars($data['ART_SUBTITLE']) . '</h3></a>';
     $carousel .= '</div></div>';
 

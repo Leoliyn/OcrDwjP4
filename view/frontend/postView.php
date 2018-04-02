@@ -65,7 +65,7 @@ $image = 'uploads/' . htmlspecialchars($data['ART_IMAGE']);
   
 <?= $data['ART_CONTENT'] ?>
 
-
+  
 </div>
     
 <div class='text-center'>
@@ -86,15 +86,19 @@ $image = 'uploads/' . htmlspecialchars($data['ART_IMAGE']);
         </div>
     </form>
     <div class='text-center'>
-        <a class="up-arrow " href="#myCarousel" data-toggle="tooltip" title="HAUT">
+        <a class="updown up-arrow " href="#article" data-toggle="tooltip" title="section précédente">
             <span class="glyphicon glyphicon-chevron-up"></span>
+        </a>
+        
+          <a class="updown down-arrow " href="#band" data-toggle="tooltip" title="section suivante">
+            <span class="glyphicon glyphicon-chevron-down"></span>
         </a>
     </div>
 </div> 
 <?php
 while ($comment = $comments->fetch()) {
     ?>
-    <div id="com<?= htmlspecialchars($comment['COMM_ID']);?>">
+    <div>
     <?php
     $commentSignale = $comment['SIGNALE'];
     if ($commentSignale) {
@@ -108,7 +112,7 @@ while ($comment = $comments->fetch()) {
         </p>
         <div>
             <p>
-        <?= nl2br(htmlspecialchars($comment['COMM_TITRE'])) ?>
+            <?= nl2br(htmlspecialchars($comment['COMM_TITRE'])) ?>
             </p>
             <p>
             <?= nl2br(htmlspecialchars($comment['COMM_CONTENU'])) ?>

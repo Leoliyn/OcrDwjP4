@@ -1,7 +1,13 @@
 <div id="band" class="resume  text-center">
-    <a class="up-arrow" href="#myCarousel" data-toggle="tooltip" title="HAUT">
-        <span class="glyphicon glyphicon-chevron-up"></span>
-    </a>
+      <div class='text-center'>
+        <a class="updown up-arrow " href="#article" data-toggle="tooltip" title="section précédente">
+            <span class="glyphicon glyphicon-chevron-up"></span>
+        </a>
+        
+          <a class="updown down-arrow " href="#contact" data-toggle="tooltip" title="section suivante">
+            <span class="glyphicon glyphicon-chevron-down"></span>
+        </a>
+    </div>
     <h3>PERSONNAGES</h3>
     <p><em>Sunt igitur firmi</em></p>
     <p>Sed (saepe enim redeo ad Scipionem, cuius omnis sermo erat de amicitia) querebatur, quod omnibus in rebus homines diligentiores essent; capras et oves quot quisque haberet, dicere posse, amicos quot haberet, non posse dicere et in illis quidem parandis adhibere curam, in amicis eligendis neglegentis esse nec habere quasi signa quaedam et notas, quibus eos qui ad amicitias essent idonei, iudicarent. Sunt igitur firmi et stabiles et constantes eligendi; cuius generis est magna penuria. Et iudicare difficile est sane nisi expertum; experiendum autem est in ipsa amicitia. Ita praecurrit amicitia iudicium tollitque experiendi potestatem.</p>

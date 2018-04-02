@@ -1,8 +1,14 @@
 
 <div id="contact" class="resume text-center">
-    <a class="up-arrow" href="#myCarousel" data-toggle="tooltip" title="HAUT">
-        <span class="glyphicon glyphicon-chevron-up"></span>
-    </a>
+    <div class='text-center'>
+        <a class="updown up-arrow " href="#band" data-toggle="tooltip" title="section précédente">
+            <span class="glyphicon glyphicon-chevron-up"></span>
+        </a>
+        
+          <a class="updown down-arrow " href="#footer" data-toggle="tooltip" title="section suivante">
+            <span class="glyphicon glyphicon-chevron-down"></span>
+        </a>
+    </div>
     <h3 class="text-center">Contacter jean FORTEROCHE</h3>
 
 
