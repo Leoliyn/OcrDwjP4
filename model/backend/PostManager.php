@@ -106,6 +106,7 @@ class PostManager extends Manager {
         $req = $db->prepare('UPDATE posts SET  ART_CHAPTER =?,ART_TITLE=?,ART_SUBTITLE=?,ART_CONTENT=?, DATE= ?,ART_DESACTIVE =?,ART_DESCRIPTION= ?,ART_KEYWORDS=?,ART_IMAGE=? WHERE ART_ID= ?');
         $req->execute(array($chapter, $title, $subtitle, $content, $date, $disable, $description, $keywords, $image, $id));
         $lastId = $db->lastInsertId();
+        return $req;
     }
 
     public function enablePost($id) {
